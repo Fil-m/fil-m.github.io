@@ -1,23 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Генерує index.html — хаб усіх сторінок Fil-m на github.io.
+Генерує index.html — повний каталог Fil-m: живі сторінки GitHub Pages,
+їхні підсторінки та репозиторії без опублікованої сторінки.
 
-Джерело істини — GitHub API + живі сторінки. Нові репозиторії з увімкненим
-Pages підхоплюються автоматично; для відомих є ручні назви й описи.
-Запускається локально або щотижня через .github/workflows/update.yml.
+Джерело істини — GitHub API + живі сторінки. Нові репозиторії
+підхоплюються автоматично (щотижневий Action).
 """
 import datetime
 import html
 import json
 import os
 import re
+import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 USER = "Fil-m"
 BASE = f"https://{USER.lower()}.github.io"
+SELF_REPO = f"{USER.lower()}.github.io"
 
 CATS = {
     "games": ("Ігри", "#7c9cff"),
@@ -63,11 +65,34 @@ CURATED = {
     "stina-3d": ("tools", "Стіна 3D", "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе."),
 }
 
+SKIP_EXT = re.compile(r"\.(css|js|png|jpe?g|svg|ico|webp|woff2?|ttf|mp3|mp4|json|xml|txt|pdf|zip|webmanifest)$", re.I)
+
 
 def get_json(url):
     req = urllib.request.Request(url, headers={"User-Agent": "Fil-m-pages-hub"})
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.loads(r.read().decode("utf-8"))
+
+
+def fetch(url, limit=200000):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return r.status, r.geturl(), r.read(limit).decode("utf-8", "ignore")
+
+
+def subpages(final, raw):
+    """Внутрішні сторінки, на які веде головна (глибина 1)."""
+    base = final if final.endswith("/") else final.rsplit("/", 1)[0] + "/"
+    out = []
+    for m in re.finditer(r'''href=["']([^"'#?]+)["']''', raw, re.I):
+        u = urllib.parse.urljoin(final, m.group(1)).split("?")[0].split("#")[0]
+        if not u.startswith(base) or u == final or SKIP_EXT.search(u):
+            continue
+        if u.rstrip("/") == base.rstrip("/"):
+            continue
+        if u not in out:
+            out.append(u)
+    return out[:8]
 
 
 def probe(repo):
@@ -76,10 +101,7 @@ def probe(repo):
     last = None
     for u in urls:
         try:
-            req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=15) as r:
-                code, final = r.status, r.geturl()
-                raw = r.read(150000).decode("utf-8", "ignore")
+            code, final, raw = fetch(u)
             title = re.search(r"<title[^>]*>(.*?)</title>", raw, re.S | re.I)
             desc = (
                 re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']', raw, re.S | re.I)
@@ -93,26 +115,45 @@ def probe(repo):
                 "meta": clean(desc.group(1)) if desc else "",
                 "repo_desc": repo.get("description") or "",
                 "updated": (repo.get("updated_at") or "")[:10],
+                "subs": subpages(final, raw),
             }
         except Exception as e:
             last = {"name": name, "url": u, "status": 0, "err": type(e).__name__,
                     "title": "", "meta": "", "repo_desc": repo.get("description") or "",
-                    "updated": (repo.get("updated_at") or "")[:10]}
+                    "updated": (repo.get("updated_at") or "")[:10], "subs": []}
     return last
 
 
 def collect():
     repos = get_json(f"https://api.github.com/users/{USER}/repos?per_page=100&sort=updated")
-    self_repo = f"{USER.lower()}.github.io"
-    todo = [r for r in repos if (r.get("has_pages") or r.get("homepage")) and r["name"] != self_repo]
+    repos = [r for r in repos if r["name"] != SELF_REPO]
+    cand = [r for r in repos if r.get("has_pages") or r.get("homepage")]
     with ThreadPoolExecutor(max_workers=10) as ex:
-        got = [x for x in ex.map(probe, todo) if x and x.get("status") == 200]
-    return got
+        probed = [p for p in ex.map(probe, cand) if p]
+    by_name = {p["name"]: p for p in probed}
+    live, dead = [], []
+    for r in repos:
+        p = by_name.get(r["name"])
+        if p and p.get("status") == 200:
+            live.append(p)
+        else:
+            dead.append({
+                "name": r["name"],
+                "desc": r.get("description") or "Без опису",
+                "updated": (r.get("updated_at") or "")[:10],
+                "lang": r.get("language") or "",
+            })
+    return live, dead
 
 
-def build(pages):
+def short(url, base):
+    tail = url[len(base):] if url.startswith(base) else url
+    return tail.rstrip("/") or "index"
+
+
+def build(live, dead):
     cards = []
-    for p in pages:
+    for p in live:
         name = p["name"]
         if name in CURATED:
             cat, title, desc = CURATED[name]
@@ -124,16 +165,24 @@ def build(pages):
             "name": name, "title": title, "desc": desc, "cat": cat,
             "url": p.get("url") or f"{BASE}/{name}/",
             "repo": f"https://github.com/{USER}/{name}",
-            "upd": p.get("updated", ""),
+            "upd": p.get("updated", ""), "subs": p.get("subs") or [],
         })
 
     order = {k: i for i, k in enumerate(CATS)}
     cards.sort(key=lambda c: (order.get(c["cat"], 99), c["name"].lower()))
+    dead.sort(key=lambda d: d["name"].lower())
 
     esc = lambda s: html.escape(str(s), quote=True)
     blocks = []
     for c in cards:
         cat_name, color = CATS.get(c["cat"], CATS["tools"])
+        subs = ""
+        if c["subs"]:
+            links = " · ".join(
+                f'<a href="{esc(u)}" target="_blank" rel="noopener">{esc(short(u, c["url"]))}</a>'
+                for u in c["subs"]
+            )
+            subs = f'<div class="subs">ще сторінки: {links}</div>'
         blocks.append(f"""
     <article class="card" data-cat="{c['cat']}" data-search="{esc((c['title'] + ' ' + c['desc'] + ' ' + c['name']).lower())}">
       <div class="top"><span class="dot" style="--c:{color}"></span>
@@ -141,17 +190,29 @@ def build(pages):
         <span class="upd">{esc(c['upd'])}</span></div>
       <h2>{esc(c['title'])}</h2>
       <p>{esc(c['desc'])}</p>
+      {subs}
       <div class="links">
         <a class="open" href="{esc(c['url'])}" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="{esc(c['repo'])}" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>""")
 
+    dead_rows = []
+    for d in dead:
+        dead_rows.append(f"""
+      <a class="row" href="https://github.com/{USER}/{esc(d['name'])}" target="_blank" rel="noopener"
+         data-search="{esc((d['name'] + ' ' + d['desc']).lower())}">
+        <span class="rname">{esc(d['name'])}</span>
+        <span class="rdesc">{esc(d['desc'])}</span>
+        <span class="rmeta">{esc(d['lang'])} · {esc(d['updated'])}</span>
+      </a>""")
+
     chips = [f'<button class="chip active" data-f="all">Усі · {len(cards)}</button>']
     for key, (nm, color) in CATS.items():
         n = sum(1 for c in cards if c["cat"] == key)
         chips.append(f'<button class="chip" data-f="{key}" style="--c:{color}">{esc(nm)} · {n}</button>')
 
+    total_subs = sum(len(c["subs"]) for c in cards)
     today = datetime.date.today().isoformat()
     return f"""<!doctype html>
 <html lang="uk">
@@ -159,7 +220,7 @@ def build(pages):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{USER} — усі сторінки</title>
-<meta name="description" content="Хаб усіх проєктів і сторінок {USER} на github.io: ігри, спільнота, анімація, творчість, інструменти.">
+<meta name="description" content="Повний каталог {USER}: живі сторінки GitHub Pages, підсторінки та репозиторії без опублікованої сторінки.">
 <style>
   :root {{ --bg:#0c0e13; --card:#151922; --card2:#1b202b; --fg:#e9ecf3; --mut:#8b93a7; --acc:#7c9cff; }}
   * {{ box-sizing:border-box; }}
@@ -168,7 +229,10 @@ def build(pages):
   header {{ padding:44px 20px 18px; max-width:1100px; margin:0 auto; }}
   .kicker {{ color:var(--mut); font-size:13px; letter-spacing:.14em; text-transform:uppercase; }}
   h1 {{ font-size:clamp(28px,6vw,44px); margin:8px 0 6px; letter-spacing:-.02em; }}
-  .sub {{ color:var(--mut); max-width:640px; }}
+  .sub {{ color:var(--mut); max-width:680px; }}
+  .stats {{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }}
+  .stat {{ background:var(--card); border:1px solid #232937; border-radius:12px; padding:10px 14px; font-size:14px; }}
+  .stat b {{ color:var(--acc); font-size:18px; }}
   .search {{ margin:22px 0 10px; }}
   input {{ width:100%; padding:14px 16px; border-radius:14px; border:1px solid #262c3a; background:#0f131b;
            color:var(--fg); font-size:16px; outline:none; }}
@@ -177,7 +241,7 @@ def build(pages):
   .chip {{ background:var(--card); color:var(--fg); border:1px solid #232937; border-radius:999px;
            padding:8px 13px; font-size:14px; cursor:pointer; }}
   .chip.active {{ background:var(--card2); border-color:var(--acc); }}
-  main {{ max-width:1100px; margin:0 auto; padding:14px 20px 60px;
+  main {{ max-width:1100px; margin:0 auto; padding:14px 20px 30px;
           display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }}
   .card {{ background:linear-gradient(180deg,#161b24,#131720); border:1px solid #212836; border-radius:18px;
            padding:18px; display:flex; flex-direction:column; min-height:190px; transition:.15s; }}
@@ -188,6 +252,9 @@ def build(pages):
   .upd {{ margin-left:auto; color:#77839a; }}
   h2 {{ font-size:19px; margin:12px 0 6px; line-height:1.25; }}
   .card p {{ color:#aab2c4; margin:0; flex:1; font-size:14.5px; }}
+  .subs {{ margin-top:10px; font-size:12.5px; color:#7d879c; line-height:1.7; }}
+  .subs a {{ color:#9fb0d0; text-decoration:none; border-bottom:1px dotted #3a4459; }}
+  .subs a:hover {{ color:var(--fg); }}
   .links {{ display:flex; align-items:center; gap:10px; margin-top:14px; }}
   .open {{ color:var(--acc); text-decoration:none; font-weight:600; font-size:14px; }}
   .open:hover {{ text-decoration:underline; }}
@@ -195,16 +262,36 @@ def build(pages):
         padding:4px 8px; border-radius:8px; }}
   .gh:hover {{ color:var(--fg); }}
   .empty {{ display:none; color:var(--mut); padding:40px 4px; grid-column:1/-1; text-align:center; }}
-  footer {{ max-width:1100px; margin:0 auto; padding:0 20px 50px; color:#77839a; font-size:13px; }}
+  .section {{ max-width:1100px; margin:0 auto; padding:26px 20px 0; }}
+  .section h3 {{ font-size:18px; margin:0 0 4px; }}
+  .section p.hint {{ color:var(--mut); margin:0 0 12px; font-size:14px; }}
+  .rows {{ display:flex; flex-direction:column; gap:8px; }}
+  .row {{ display:grid; grid-template-columns:220px 1fr auto; gap:12px; align-items:center;
+          background:var(--card); border:1px solid #1f2532; border-radius:12px; padding:12px 14px;
+          text-decoration:none; color:var(--fg); }}
+  .row:hover {{ border-color:#2f3a52; }}
+  .rname {{ font-weight:600; font-size:14px; }}
+  .rdesc {{ color:#98a1b5; font-size:13.5px; }}
+  .rmeta {{ color:#5f6879; font-size:12px; white-space:nowrap; }}
+  footer {{ max-width:1100px; margin:0 auto; padding:30px 20px 50px; color:#77839a; font-size:13px; }}
   footer a {{ color:#7d879c; }}
+  @media (max-width:640px) {{
+    .row {{ grid-template-columns:1fr; gap:4px; }}
+    .rmeta {{ display:none; }}
+  }}
 </style>
 </head>
 <body>
 <header>
   <div class="kicker">github.io</div>
   <h1>Усі сторінки</h1>
-  <p class="sub">{len(cards)} живих проєктів: ігри, спільнота, анімація для дітей, творчість та інструменти.
-  Усе — статичні сторінки на GitHub Pages, без бекенду.</p>
+  <p class="sub">Повний каталог: живі сайти на GitHub Pages, їхні внутрішні сторінки
+  і репозиторії, які ще не опубліковані як сторінка.</p>
+  <div class="stats">
+    <div class="stat"><b>{len(cards)}</b> живих сайтів</div>
+    <div class="stat"><b>{len(cards) + total_subs}</b> сторінок усього</div>
+    <div class="stat"><b>{len(dead)}</b> репо без сторінки</div>
+  </div>
   <div class="search"><input id="q" type="search" placeholder="Пошук: назва, опис, тема…" autocomplete="off"></div>
   <div class="chips">{''.join(chips)}</div>
 </header>
@@ -212,13 +299,23 @@ def build(pages):
 {''.join(blocks)}
   <div class="empty" id="empty">Нічого не знайдено. Спробуй інше слово.</div>
 </main>
+
+<section class="section" id="dead">
+  <h3>Репозиторії без опублікованої сторінки · {len(dead)}</h3>
+  <p class="hint">Код є, GitHub Pages не увімкнений (або сторінка не збирається). Клік веде в репозиторій.</p>
+  <div class="rows" id="deadrows">
+{''.join(dead_rows)}
+  </div>
+</section>
+
 <footer>
   <p>Оновлено {today} · <a href="https://github.com/{USER}">github.com/{USER}</a> ·
-  <a href="https://github.com/{USER}/{USER.lower()}.github.io">код цієї сторінки</a></p>
+  <a href="https://github.com/{USER}/{SELF_REPO}">код цієї сторінки</a></p>
 </footer>
 <script>
 const cards=[...document.querySelectorAll('.card')];
-const q=document.getElementById('q'), empty=document.getElementById('empty');
+const rows=[...document.querySelectorAll('.row')];
+const q=document.getElementById('q'), empty=document.getElementById('empty'), dead=document.getElementById('dead');
 let cat='all';
 function apply(){{
   const s=q.value.trim().toLowerCase(); let n=0;
@@ -227,7 +324,13 @@ function apply(){{
     const okQ = !s || c.dataset.search.includes(s);
     const show = okCat && okQ; c.style.display = show?'':'none'; if(show) n++;
   }});
-  empty.style.display = n?'none':'block';
+  let m=0;
+  rows.forEach(r=>{{
+    const show = (!s || r.dataset.search.includes(s)) && cat==='all';
+    r.style.display = show?'':'none'; if(show) m++;
+  }});
+  dead.style.display = m?'block':'none';
+  empty.style.display = (n||m)?'none':'block';
 }}
 q.addEventListener('input',apply);
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
@@ -241,14 +344,13 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
 
 
 def main():
-    pages = collect()
-    out = build(pages)
-    path = os.path.join(HERE, "index.html")
-    open(path, "w", encoding="utf-8").write(out)
+    live, dead = collect()
+    out = build(live, dead)
+    open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(out)
     open(os.path.join(HERE, ".nojekyll"), "w").write("")
-    json.dump(pages, open(os.path.join(HERE, "pages.json"), "w", encoding="utf-8"),
+    json.dump({"live": live, "dead": dead}, open(os.path.join(HERE, "pages.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
-    print(f"index.html: {len(out)} байт · {len(pages)} сторінок")
+    print(f"index.html: {len(out)} байт · {len(live)} сайтів · {len(dead)} без сторінки")
 
 
 if __name__ == "__main__":

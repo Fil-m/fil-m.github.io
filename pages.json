@@ -1,254 +1,394 @@
-[
- {
-  "name": "pixel-flow",
-  "url": "https://fil-m.github.io/pixel-flow/",
-  "status": 200,
-  "title": "Pixel Flow — 4 черги",
-  "meta": "",
-  "repo_desc": "Pixel Flow clone + photo level generator",
-  "updated": "2026-10-27"
- },
- {
-  "name": "flow-editor",
-  "url": "https://fil-m.github.io/flow-editor/",
-  "status": 200,
-  "title": "Flow Edit — редактор",
-  "meta": "",
-  "repo_desc": "Flow Edit — міні-редактор відео для «Шляху Потоку» (таймлайн + CSS-візуали)",
-  "updated": "2026-10-17"
- },
- {
-  "name": "spilnota",
-  "url": "https://fil-m.github.io/spilnota/",
-  "status": 200,
-  "title": "Спільнота",
-  "meta": "",
-  "repo_desc": "Спільнота — суспільна мережа в стилі ВК 2013. Без сервера: дані в JSON-файлах репо через GitHub API.",
-  "updated": "2026-09-25"
- },
- {
-  "name": "element-game",
-  "url": "https://fil-m.github.io/element-game/",
-  "status": 200,
-  "title": "Element World",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-09-05"
- },
- {
-  "name": "context",
-  "url": "https://fil-m.github.io/context/",
-  "status": 200,
-  "title": "CONTEXT v3 — Тіло",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-08-19"
- },
- {
-  "name": "ReGo",
-  "url": "https://fil-m.github.io/ReGo/",
-  "status": 200,
-  "title": "SYNERGY: PHASE SHIFT 3D",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-08-17"
- },
- {
-  "name": "animation-trial",
-  "url": "https://fil-m.github.io/animation-trial/",
-  "status": 200,
-  "title": "Створіть мультфільм разом із дитиною — Animation Mentors",
-  "meta": "За 60–90 хвилин дитина разом із батьками придумає історію, створить героїв, зніме її кадр за кадром — і підете додому з власним фільмом. Онлайн. Перше заняття — безкоштовно.",
-  "repo_desc": "",
-  "updated": "2026-08-16"
- },
- {
-  "name": "flow-path",
-  "url": "https://fil-m.github.io/flow-path/",
-  "status": 200,
-  "title": "Шлях Потоку — релігія процесу, свідомості та продовження",
-  "meta": "Шлях Потоку — світогляд, що бачить світ як процес. Без бога-творця, без догм, без обіцянок безсмертя. Текст із тридцяти розділів.",
-  "repo_desc": "",
-  "updated": "2026-08-09"
- },
- {
-  "name": "WUW",
-  "url": "https://fil-m.github.io/WUW/",
-  "status": 200,
-  "title": "Кіноразом 🎬 — дивимось відео разом",
-  "meta": "",
-  "repo_desc": "With U Watching ",
-  "updated": "2026-08-08"
- },
- {
-  "name": "exchange-scanner-beta",
-  "url": "https://fil-m.github.io/exchange-scanner-beta/",
-  "status": 200,
-  "title": "Exchange Scanner — аналіз пар і стратегій",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-08-05"
- },
- {
-  "name": "exchange-scanner",
-  "url": "https://fil-m.github.io/exchange-scanner/",
-  "status": 200,
-  "title": "Exchange Scanner — аналіз пар і стратегій",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-08-05"
- },
- {
-  "name": "animation-workshop",
-  "url": "https://fil-m.github.io/animation-workshop/",
-  "status": 200,
-  "title": "Анімаційна майстерня для батьків і дітей | Karlsruhe",
-  "meta": "Безкоштовна анімаційна майстерня stop-motion для батьків і дітей 6–12 років у Karlsruhe. 2 суботи на місяць у кав",
-  "repo_desc": "🎬 Безкоштовна анімаційна майстерня stop-motion для батьків і дітей у Karlsruhe. 2 суботи на місяць у кав'ярні Ja, genau!",
-  "updated": "2026-07-28"
- },
- {
-  "name": "recoil-game",
-  "url": "https://fil-m.github.io/recoil-game/",
-  "status": 200,
-  "title": "Recoil Gun — Браузерна гра",
-  "meta": "Керуйте пістолетом за допомогою фізики віддачі. Летіть, крутіться, знищуйте ворогів!",
-  "repo_desc": "",
-  "updated": "2026-07-27"
- },
- {
-  "name": "habitat-os-test",
-  "url": "https://fil-m.github.io/habitat-os-test/",
-  "status": 200,
-  "title": "Habitat OS",
-  "meta": "",
-  "repo_desc": "Habitat OS — Test platform with Match-3, Git chat, shop, skins",
-  "updated": "2026-07-16"
- },
- {
-  "name": "portfolio-page",
-  "url": "https://fil-m.github.io/portfolio-page/",
-  "status": 200,
-  "title": "Тарас Москаленко — Людина. Творець.",
-  "meta": "Тарас Москаленко — спеціаліст з розвитку. Анімація для дітей, 3D-друк, гейм-девелопмент, творчість, психологія.",
-  "repo_desc": "Персональна сторінка-портфоліо Тараса Москаленка",
-  "updated": "2026-07-08"
- },
- {
-  "name": "kids-games",
-  "url": "https://fil-m.github.io/kids-games/",
-  "status": 200,
-  "title": "🎮 Дитячі ігри — навчання через гру",
-  "meta": "",
-  "repo_desc": "🎮 Дитячі навчальні ігри: абетка, цифри, рахунок, кольори",
-  "updated": "2026-07-05"
- },
- {
-  "name": "animation_mentors",
-  "url": "https://fil-m.github.io/animation_mentors/",
-  "status": 200,
-  "title": "Анімація для дітей — Менторство та Підготовка до Фестивалів | Тарас Москаленко",
-  "meta": "Професійне менторство з анімації для дітей 7-18 років. ADHD-friendly підхід, підготовка до міжнародних фестивалів (Annecy, Zlín). Режисер та психолог Тарас Москаленко.",
-  "repo_desc": "",
-  "updated": "2026-07-05"
- },
- {
-  "name": "stina-3d",
-  "url": "https://fil-m.github.io/stina-3d/",
-  "status": 200,
-  "title": "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе",
-  "meta": "",
-  "repo_desc": "Стіна 3D друкарня — бюджетна волонтерська 3D-ферма в Карлсруе",
-  "updated": "2026-07-05"
- },
- {
-  "name": "diya-do-mriyi",
-  "url": "https://fil-m.github.io/diya-do-mriyi/",
-  "status": 200,
-  "title": "Дія до мрії — «Ходімо. Зараз перевіримо.»",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-07-05"
- },
- {
-  "name": "--braves",
-  "url": "https://fil-m.github.io/--braves/",
-  "status": 200,
-  "title": "Infinity Braves — Скринінг / Screening",
-  "meta": "",
-  "repo_desc": "Infinity Braves — Support group for neurodivergent adults / Gruppe für neurodivergente Erwachsene / Група підтримки нейровідмінних дорослих",
-  "updated": "2026-07-03"
- },
- {
-  "name": "art-picnic",
-  "url": "https://fil-m.github.io/art-picnic/",
-  "status": 200,
-  "title": "Арт Пікнік — знімай кіно з друзями",
-  "meta": "Щомісячний безкоштовний арт-пікнік для родин: знімаємо кліп або стопмоушен, монтуємо на місці, влаштовуємо прем",
-  "repo_desc": "",
-  "updated": "2026-07-03"
- },
- {
-  "name": "hermonoid",
-  "url": "https://fil-m.github.io/hermonoid/",
-  "status": 200,
-  "title": "Hermonoid — Web Chat для Hermes Agent на Android",
-  "meta": "Hermonoid — веб-чат для Hermes Agent. Працює на Android через Termux. Одна команда для встановлення.",
-  "repo_desc": "Web chat UI for Hermes Agent on Android",
-  "updated": "2026-06-18"
- },
- {
-  "name": "bitsprite",
-  "url": "https://fil-m.github.io/bitsprite/",
-  "status": 200,
-  "title": "КАБАЛОК — Кристал",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-06-14"
- },
- {
-  "name": "habitat-os-workshop",
-  "url": "https://fil-m.github.io/habitat-os-workshop/",
-  "status": 200,
-  "title": "Habitat OS",
-  "meta": "",
-  "repo_desc": "Майстерня платформи Habitat OS",
-  "updated": "2026-06-05"
- },
- {
-  "name": "akira-mental-math",
-  "url": "https://fil-m.github.io/akira-mental-math/",
-  "status": 200,
-  "title": "Akira — Ментальна Арифметика",
-  "meta": "",
-  "repo_desc": "Akira — генератор вправ для ментальної арифметики на абакусі",
-  "updated": "2026-05-27"
- },
- {
-  "name": "mine-avatar-hub",
-  "url": "https://fil-m.github.io/mine-avatar-hub/",
-  "status": 200,
-  "title": "Mine & Craft Avatar Hub — Розподілена Ігрова Екосистема",
-  "meta": "Сучасна розподілена безсерверна ігрова екосистема з локальним збереженням IndexedDB, безпечною пісочницею та синхронізацією через Git або радіомережу EME.",
-  "repo_desc": "",
-  "updated": "2026-05-21"
- },
- {
-  "name": "aim-lab-scientist",
-  "url": "https://fil-m.github.io/aim-lab-scientist/",
-  "status": 200,
-  "title": "NeuroAim Research Suite",
-  "meta": "",
-  "repo_desc": "",
-  "updated": "2026-05-12"
- },
- {
-  "name": "Memology-Website-UA",
-  "url": "https://fil-m.github.io/Memology-Website-UA/",
-  "status": 200,
-  "title": "МЕМЛОГІЯ: СИНГУЛЯРНІСТЬ — Пентологія про Майбутнє",
-  "meta": "П",
-  "repo_desc": "",
-  "updated": "2026-04-18"
- }
-]
+{
+ "live": [
+  {
+   "name": "pixel-flow",
+   "url": "https://fil-m.github.io/pixel-flow/",
+   "status": 200,
+   "title": "Pixel Flow — 4 черги",
+   "meta": "",
+   "repo_desc": "Pixel Flow clone + photo level generator",
+   "updated": "2026-10-27",
+   "subs": []
+  },
+  {
+   "name": "flow-editor",
+   "url": "https://fil-m.github.io/flow-editor/",
+   "status": 200,
+   "title": "Flow Edit — редактор",
+   "meta": "",
+   "repo_desc": "Flow Edit — міні-редактор відео для «Шляху Потоку» (таймлайн + CSS-візуали)",
+   "updated": "2026-10-17",
+   "subs": [
+    "https://fil-m.github.io/flow-editor/${API}${s.video}"
+   ]
+  },
+  {
+   "name": "spilnota",
+   "url": "https://fil-m.github.io/spilnota/",
+   "status": 200,
+   "title": "Спільнота",
+   "meta": "",
+   "repo_desc": "Спільнота — суспільна мережа в стилі ВК 2013. Без сервера: дані в JSON-файлах репо через GitHub API.",
+   "updated": "2026-09-25",
+   "subs": []
+  },
+  {
+   "name": "element-game",
+   "url": "https://fil-m.github.io/element-game/",
+   "status": 200,
+   "title": "Element World",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-09-05",
+   "subs": []
+  },
+  {
+   "name": "context",
+   "url": "https://fil-m.github.io/context/",
+   "status": 200,
+   "title": "CONTEXT v3 — Тіло",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-08-19",
+   "subs": []
+  },
+  {
+   "name": "ReGo",
+   "url": "https://fil-m.github.io/ReGo/",
+   "status": 200,
+   "title": "SYNERGY: PHASE SHIFT 3D",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-08-17",
+   "subs": []
+  },
+  {
+   "name": "animation-trial",
+   "url": "https://fil-m.github.io/animation-trial/",
+   "status": 200,
+   "title": "Створіть мультфільм разом із дитиною — Animation Mentors",
+   "meta": "За 60–90 хвилин дитина разом із батьками придумає історію, створить героїв, зніме її кадр за кадром — і підете додому з власним фільмом. Онлайн. Перше заняття — безкоштовно.",
+   "repo_desc": "",
+   "updated": "2026-08-16",
+   "subs": []
+  },
+  {
+   "name": "flow-path",
+   "url": "https://fil-m.github.io/flow-path/",
+   "status": 200,
+   "title": "Шлях Потоку — релігія процесу, свідомості та продовження",
+   "meta": "Шлях Потоку — світогляд, що бачить світ як процес. Без бога-творця, без догм, без обіцянок безсмертя. Текст із тридцяти розділів.",
+   "repo_desc": "",
+   "updated": "2026-08-09",
+   "subs": [
+    "https://fil-m.github.io/flow-path/en/"
+   ]
+  },
+  {
+   "name": "WUW",
+   "url": "https://fil-m.github.io/WUW/",
+   "status": 200,
+   "title": "Кіноразом 🎬 — дивимось відео разом",
+   "meta": "",
+   "repo_desc": "With U Watching ",
+   "updated": "2026-08-08",
+   "subs": []
+  },
+  {
+   "name": "exchange-scanner-beta",
+   "url": "https://fil-m.github.io/exchange-scanner-beta/",
+   "status": 200,
+   "title": "Exchange Scanner — аналіз пар і стратегій",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-08-05",
+   "subs": []
+  },
+  {
+   "name": "exchange-scanner",
+   "url": "https://fil-m.github.io/exchange-scanner/",
+   "status": 200,
+   "title": "Exchange Scanner — аналіз пар і стратегій",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-08-05",
+   "subs": []
+  },
+  {
+   "name": "animation-workshop",
+   "url": "https://fil-m.github.io/animation-workshop/",
+   "status": 200,
+   "title": "Анімаційна майстерня для батьків і дітей | Karlsruhe",
+   "meta": "Безкоштовна анімаційна майстерня stop-motion для батьків і дітей 6–12 років у Karlsruhe. 2 суботи на місяць у кав",
+   "repo_desc": "🎬 Безкоштовна анімаційна майстерня stop-motion для батьків і дітей у Karlsruhe. 2 суботи на місяць у кав'ярні Ja, genau!",
+   "updated": "2026-07-28",
+   "subs": [
+    "https://fil-m.github.io/animation-workshop/index.html",
+    "https://fil-m.github.io/animation-workshop/de.html",
+    "https://fil-m.github.io/animation-workshop/impressum.html",
+    "https://fil-m.github.io/animation-workshop/datenschutz.html"
+   ]
+  },
+  {
+   "name": "recoil-game",
+   "url": "https://fil-m.github.io/recoil-game/",
+   "status": 200,
+   "title": "Recoil Gun — Браузерна гра",
+   "meta": "Керуйте пістолетом за допомогою фізики віддачі. Летіть, крутіться, знищуйте ворогів!",
+   "repo_desc": "",
+   "updated": "2026-07-27",
+   "subs": []
+  },
+  {
+   "name": "habitat-os-test",
+   "url": "https://fil-m.github.io/habitat-os-test/",
+   "status": 200,
+   "title": "Habitat OS",
+   "meta": "",
+   "repo_desc": "Habitat OS — Test platform with Match-3, Git chat, shop, skins",
+   "updated": "2026-07-16",
+   "subs": []
+  },
+  {
+   "name": "portfolio-page",
+   "url": "https://fil-m.github.io/portfolio-page/",
+   "status": 200,
+   "title": "Тарас Москаленко — Людина. Творець.",
+   "meta": "Тарас Москаленко — спеціаліст з розвитку. Анімація для дітей, 3D-друк, гейм-девелопмент, творчість, психологія.",
+   "repo_desc": "Персональна сторінка-портфоліо Тараса Москаленка",
+   "updated": "2026-07-08",
+   "subs": [
+    "https://fil-m.github.io/portfolio-page/index-de.html"
+   ]
+  },
+  {
+   "name": "kids-games",
+   "url": "https://fil-m.github.io/kids-games/",
+   "status": 200,
+   "title": "🎮 Дитячі ігри — навчання через гру",
+   "meta": "",
+   "repo_desc": "🎮 Дитячі навчальні ігри: абетка, цифри, рахунок, кольори",
+   "updated": "2026-07-05",
+   "subs": [
+    "https://fil-m.github.io/kids-games/wonder-tablet/",
+    "https://fil-m.github.io/kids-games/letter-learn/",
+    "https://fil-m.github.io/kids-games/math-play/"
+   ]
+  },
+  {
+   "name": "animation_mentors",
+   "url": "https://fil-m.github.io/animation_mentors/",
+   "status": 200,
+   "title": "Анімація для дітей — Менторство та Підготовка до Фестивалів | Тарас Москаленко",
+   "meta": "Професійне менторство з анімації для дітей 7-18 років. ADHD-friendly підхід, підготовка до міжнародних фестивалів (Annecy, Zlín). Режисер та психолог Тарас Москаленко.",
+   "repo_desc": "",
+   "updated": "2026-07-05",
+   "subs": [
+    "https://fil-m.github.io/animation_mentors/partners.html"
+   ]
+  },
+  {
+   "name": "stina-3d",
+   "url": "https://fil-m.github.io/stina-3d/",
+   "status": 200,
+   "title": "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе",
+   "meta": "",
+   "repo_desc": "Стіна 3D друкарня — бюджетна волонтерська 3D-ферма в Карлсруе",
+   "updated": "2026-07-05",
+   "subs": [
+    "https://fil-m.github.io/stina-3d/index.html",
+    "https://fil-m.github.io/stina-3d/de.html"
+   ]
+  },
+  {
+   "name": "diya-do-mriyi",
+   "url": "https://fil-m.github.io/diya-do-mriyi/",
+   "status": 200,
+   "title": "Дія до мрії — «Ходімо. Зараз перевіримо.»",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-07-05",
+   "subs": [
+    "https://fil-m.github.io/diya-do-mriyi/index-de.html",
+    "https://fil-m.github.io/diya-do-mriyi/impressum.html",
+    "https://fil-m.github.io/diya-do-mriyi/datenschutz.html"
+   ]
+  },
+  {
+   "name": "--braves",
+   "url": "https://fil-m.github.io/--braves/",
+   "status": 200,
+   "title": "Infinity Braves — Скринінг / Screening",
+   "meta": "",
+   "repo_desc": "Infinity Braves — Support group for neurodivergent adults / Gruppe für neurodivergente Erwachsene / Група підтримки нейровідмінних дорослих",
+   "updated": "2026-07-03",
+   "subs": []
+  },
+  {
+   "name": "art-picnic",
+   "url": "https://fil-m.github.io/art-picnic/",
+   "status": 200,
+   "title": "Арт Пікнік — знімай кіно з друзями",
+   "meta": "Щомісячний безкоштовний арт-пікнік для родин: знімаємо кліп або стопмоушен, монтуємо на місці, влаштовуємо прем",
+   "repo_desc": "",
+   "updated": "2026-07-03",
+   "subs": []
+  },
+  {
+   "name": "hermonoid",
+   "url": "https://fil-m.github.io/hermonoid/",
+   "status": 200,
+   "title": "Hermonoid — Web Chat для Hermes Agent на Android",
+   "meta": "Hermonoid — веб-чат для Hermes Agent. Працює на Android через Termux. Одна команда для встановлення.",
+   "repo_desc": "Web chat UI for Hermes Agent on Android",
+   "updated": "2026-06-18",
+   "subs": []
+  },
+  {
+   "name": "bitsprite",
+   "url": "https://fil-m.github.io/bitsprite/",
+   "status": 200,
+   "title": "КАБАЛОК — Кристал",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-06-14",
+   "subs": []
+  },
+  {
+   "name": "habitat-os-workshop",
+   "url": "https://fil-m.github.io/habitat-os-workshop/",
+   "status": 200,
+   "title": "Habitat OS",
+   "meta": "",
+   "repo_desc": "Майстерня платформи Habitat OS",
+   "updated": "2026-06-05",
+   "subs": []
+  },
+  {
+   "name": "akira-mental-math",
+   "url": "https://fil-m.github.io/akira-mental-math/",
+   "status": 200,
+   "title": "Akira — Ментальна Арифметика",
+   "meta": "",
+   "repo_desc": "Akira — генератор вправ для ментальної арифметики на абакусі",
+   "updated": "2026-05-27",
+   "subs": []
+  },
+  {
+   "name": "mine-avatar-hub",
+   "url": "https://fil-m.github.io/mine-avatar-hub/",
+   "status": 200,
+   "title": "Mine & Craft Avatar Hub — Розподілена Ігрова Екосистема",
+   "meta": "Сучасна розподілена безсерверна ігрова екосистема з локальним збереженням IndexedDB, безпечною пісочницею та синхронізацією через Git або радіомережу EME.",
+   "repo_desc": "",
+   "updated": "2026-05-21",
+   "subs": []
+  },
+  {
+   "name": "aim-lab-scientist",
+   "url": "https://fil-m.github.io/aim-lab-scientist/",
+   "status": 200,
+   "title": "NeuroAim Research Suite",
+   "meta": "",
+   "repo_desc": "",
+   "updated": "2026-05-12",
+   "subs": []
+  },
+  {
+   "name": "Memology-Website-UA",
+   "url": "https://fil-m.github.io/Memology-Website-UA/",
+   "status": 200,
+   "title": "МЕМЛОГІЯ: СИНГУЛЯРНІСТЬ — Пентологія про Майбутнє",
+   "meta": "П",
+   "repo_desc": "",
+   "updated": "2026-04-18",
+   "subs": []
+  }
+ ],
+ "dead": [
+  {
+   "name": "agent-blog-content",
+   "desc": "Без опису",
+   "updated": "2026-06-10",
+   "lang": "Jupyter Notebook"
+  },
+  {
+   "name": "cdn-lag-test",
+   "desc": "Без опису",
+   "updated": "2026-08-22",
+   "lang": ""
+  },
+  {
+   "name": "day_of_help",
+   "desc": "Без опису",
+   "updated": "2025-06-24",
+   "lang": ""
+  },
+  {
+   "name": "Dranyk",
+   "desc": "Без опису",
+   "updated": "2024-11-24",
+   "lang": "Python"
+  },
+  {
+   "name": "eme",
+   "desc": "Без опису",
+   "updated": "2026-03-08",
+   "lang": "Python"
+  },
+  {
+   "name": "eme-kivy-host",
+   "desc": "Без опису",
+   "updated": "2026-03-16",
+   "lang": "Python"
+  },
+  {
+   "name": "eme-p4p_bot",
+   "desc": "Без опису",
+   "updated": "2026-02-05",
+   "lang": "Python"
+  },
+  {
+   "name": "hermes-skva",
+   "desc": "SKVA — multi-agent production system for Hermes",
+   "updated": "2026-06-10",
+   "lang": "Python"
+  },
+  {
+   "name": "Memology-Universe-UA",
+   "desc": "Без опису",
+   "updated": "2026-04-18",
+   "lang": "HTML"
+  },
+  {
+   "name": "ref",
+   "desc": "Без опису",
+   "updated": "2024-11-28",
+   "lang": "Python"
+  },
+  {
+   "name": "referal",
+   "desc": "Без опису",
+   "updated": "2026-08-04",
+   "lang": "Python"
+  },
+  {
+   "name": "shliakh-potoku",
+   "desc": "Без опису",
+   "updated": "2026-08-08",
+   "lang": ""
+  },
+  {
+   "name": "spilnota-Fil-m",
+   "desc": "Моя сторінка у Спільноті",
+   "updated": "2026-08-24",
+   "lang": "JavaScript"
+  },
+  {
+   "name": "vlog-automator",
+   "desc": "Без опису",
+   "updated": "2026-02-22",
+   "lang": "Python"
+  }
+ ]
+}
