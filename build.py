@@ -1,14 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Генерує index.html — хаб усіх сторінок Fil-m на github.io."""
+"""
+Генерує index.html — хаб усіх сторінок Fil-m на github.io.
+
+Джерело істини — GitHub API + живі сторінки. Нові репозиторії з увімкненим
+Pages підхоплюються автоматично; для відомих є ручні назви й описи.
+Запускається локально або щотижня через .github/workflows/update.yml.
+"""
+import datetime
 import html
 import json
 import os
 import re
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+USER = "Fil-m"
+BASE = f"https://{USER.lower()}.github.io"
 
-# name -> (category, опис)
 CATS = {
     "games": ("Ігри", "#7c9cff"),
     "community": ("Спільнота", "#4fd1a5"),
@@ -17,89 +27,113 @@ CATS = {
     "tools": ("Інструменти", "#5ec8e5"),
 }
 
-PAGES = {
-    "pixel-flow": ("games", "Головоломка в стилі Pixel Flow: заливаєш клітинки кольором, поки не збереш малюнок. Плюс генератор рівнів із власних фото."),
-    "element-game": ("games", "Element World — пісочниця, де з чотирьох стихій збираються нові елементи."),
-    "context": ("games", "CONTEXT v3 «Тіло»: три слоти, збірка як рух, довгий тап — розібрати."),
-    "ReGo": ("games", "SYNERGY: PHASE SHIFT — 3D-шутер у браузері на Node + WebSocket, із живими кімнатами."),
-    "recoil-game": ("games", "Recoil Gun — аркада, де пістолетом керує фізика віддачі: лети, крутись, збивай ворогів."),
-    "bitsprite": ("games", "КАБАЛОК — Кристал: маленький піксельний експеримент."),
-    "kids-games": ("games", "Дитячі навчальні ігри: абетка, цифри, рахунок, кольори. Великі кнопки, без реклами."),
-    "mine-avatar-hub": ("games", "Mine & Craft Avatar Hub — безсерверна ігрова екосистема з аватарами й локальним збереженням."),
-    "habitat-os-test": ("games", "Habitat OS — тестовий майданчик платформи: Match-3, чат через Git, магазин, скіни."),
-    "habitat-os-workshop": ("games", "Майстерня Habitat OS — робоча версія платформи для збірки й експериментів."),
-    "aim-lab-scientist": ("games", "NeuroAim Lab — тренажер прицілювання з науковим підходом: заміри, серії, статистика."),
+# name -> (category, title, опис)
+CURATED = {
+    "pixel-flow": ("games", "Pixel Flow", "Головоломка в стилі Pixel Flow: заливаєш клітинки кольором, поки не збереш малюнок. Плюс генератор рівнів із власних фото."),
+    "element-game": ("games", "Element World", "Element World — пісочниця, де з чотирьох стихій збираються нові елементи."),
+    "context": ("games", "CONTEXT v3 — Тіло", "CONTEXT v3 «Тіло»: три слоти, збірка як рух, довгий тап — розібрати."),
+    "ReGo": ("games", "SYNERGY: PHASE SHIFT 3D", "SYNERGY: PHASE SHIFT — 3D-шутер у браузері на Node + WebSocket, із живими кімнатами."),
+    "recoil-game": ("games", "Recoil Gun", "Recoil Gun — аркада, де пістолетом керує фізика віддачі: лети, крутись, збивай ворогів."),
+    "bitsprite": ("games", "КАБАЛОК — Кристал", "КАБАЛОК — Кристал: маленький піксельний експеримент."),
+    "kids-games": ("games", "Дитячі ігри", "Дитячі навчальні ігри: абетка, цифри, рахунок, кольори. Великі кнопки, без реклами."),
+    "mine-avatar-hub": ("games", "Mine & Craft Avatar Hub", "Mine & Craft Avatar Hub — безсерверна ігрова екосистема з аватарами й локальним збереженням."),
+    "habitat-os-test": ("games", "Habitat OS — тест", "Habitat OS — тестовий майданчик платформи: Match-3, чат через Git, магазин, скіни."),
+    "habitat-os-workshop": ("games", "Habitat OS — майстерня", "Майстерня Habitat OS — робоча версія платформи для збірки й експериментів."),
+    "aim-lab-scientist": ("games", "NeuroAim Lab", "NeuroAim Lab — тренажер прицілювання з науковим підходом: заміри, серії, статистика."),
 
-    "spilnota": ("community", "Спільнота — соцмережа в стилі ВК 2013. Без сервера: дані живуть у JSON-файлах репозиторію."),
-    "--braves": ("community", "Infinity Braves — група підтримки для нейровідмінних дорослих. Скринінг трьома мовами."),
-    "WUW": ("community", "Кіноразом — дивимось відео разом: синхронний перегляд і чат."),
-    "art-picnic": ("community", "Арт Пікнік — щомісячна безкоштовна зустріч для родин: знімаємо кліп або стопмоушен."),
-    "diya-do-mriyi": ("community", "Дія до мрії — «Ходімо. Зараз перевіримо»: путівник від наміру до першого кроку."),
+    "spilnota": ("community", "Спільнота", "Спільнота — соцмережа в стилі ВК 2013. Без сервера: дані живуть у JSON-файлах репозиторію."),
+    "--braves": ("community", "Infinity Braves", "Infinity Braves — група підтримки для нейровідмінних дорослих. Скринінг трьома мовами."),
+    "WUW": ("community", "Кіноразом", "Кіноразом — дивимось відео разом: синхронний перегляд і чат."),
+    "art-picnic": ("community", "Арт Пікнік", "Арт Пікнік — щомісячна безкоштовна зустріч для родин: знімаємо кліп або стопмоушен."),
+    "diya-do-mriyi": ("community", "Дія до мрії", "Дія до мрії — «Ходімо. Зараз перевіримо»: путівник від наміру до першого кроку."),
 
-    "animation-workshop": ("kids", "Безкоштовна stop-motion майстерня для батьків і дітей у Карлсруе, дві суботи на місяць."),
-    "animation-trial": ("kids", "Пробне заняття: за 60–90 хвилин дитина з батьками придумує історію, героїв і знімає перші кадри."),
-    "animation_mentors": ("kids", "Менторство з анімації для дітей 7–18 років: підготовка до фестивалів, ADHD-friendly підхід."),
+    "animation-workshop": ("kids", "Анімаційна майстерня", "Безкоштовна stop-motion майстерня для батьків і дітей у Карлсруе, дві суботи на місяць."),
+    "animation-trial": ("kids", "Пробне заняття з анімації", "За 60–90 хвилин дитина з батьками придумує історію, героїв і знімає перші кадри."),
+    "animation_mentors": ("kids", "Менторство з анімації", "Менторство для дітей 7–18 років: підготовка до фестивалів, ADHD-friendly підхід."),
 
-    "flow-path": ("creative", "Шлях Потоку — світогляд, що бачить світ як процес: без бога-творця, без догм."),
-    "flow-editor": ("creative", "Flow Edit — міні-редактор відео для «Шляху Потоку»: таймлайн і CSS-візуали."),
-    "portfolio-page": ("creative", "Персональна сторінка Тараса Москаленка: хто я, що роблю, як зв'язатися."),
-    "Memology-Website-UA": ("creative", "МЕМОЛОГІЯ: Сингулярність — пентологія про майбутнє, людей і машини."),
+    "flow-path": ("creative", "Шлях Потоку", "Шлях Потоку — світогляд, що бачить світ як процес: без бога-творця, без догм."),
+    "flow-editor": ("creative", "Flow Edit", "Flow Edit — міні-редактор відео для «Шляху Потоку»: таймлайн і CSS-візуали."),
+    "portfolio-page": ("creative", "Портфоліо", "Персональна сторінка Тараса Москаленка: хто я, що роблю, як зв'язатися."),
+    "Memology-Website-UA": ("creative", "МЕМОЛОГІЯ", "МЕМОЛОГІЯ: Сингулярність — пентологія про майбутнє, людей і машини."),
 
-    "exchange-scanner": ("tools", "Аналіз валютних пар і торгових стратегій в одному екрані."),
-    "exchange-scanner-beta": ("tools", "Бета Exchange Scanner — нові пари й експериментальні стратегії."),
-    "akira-mental-math": ("tools", "Akira — генератор вправ з ментальної арифметики на абакусі."),
-    "hermonoid": ("tools", "Hermonoid — веб-чат для Hermes Agent на Android."),
-    "stina-3d": ("tools", "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе."),
+    "exchange-scanner": ("tools", "Exchange Scanner", "Аналіз валютних пар і торгових стратегій в одному екрані."),
+    "exchange-scanner-beta": ("tools", "Exchange Scanner BETA", "Бета Exchange Scanner — нові пари й експериментальні стратегії."),
+    "akira-mental-math": ("tools", "Akira — ментальна арифметика", "Akira — генератор вправ з ментальної арифметики на абакусі."),
+    "hermonoid": ("tools", "Hermonoid", "Hermonoid — веб-чат для Hermes Agent на Android."),
+    "stina-3d": ("tools", "Стіна 3D", "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе."),
 }
 
-TITLES = {
-    "--braves": "Infinity Braves",
-    "context": "CONTEXT v3 — Тіло",
-    "diya-do-mriyi": "Дія до мрії",
-    "ReGo": "SYNERGY: PHASE SHIFT 3D",
-    "habitat-os-test": "Habitat OS — тест",
-    "habitat-os-workshop": "Habitat OS — майстерня",
-    "aim-lab-scientist": "NeuroAim Lab",
-    "pixel-flow": "Pixel Flow",
-    "element-game": "Element World",
-    "bitsprite": "КАБАЛОК — Кристал",
-    "WUW": "Кіноразом",
-    "spilnota": "Спільнота",
-    "flow-path": "Шлях Потоку",
-}
 
-probe = {p["name"]: p for p in json.load(open(os.path.join(HERE, "probe.json"), encoding="utf-8"))}
-
-cards = []
-for name, (cat, desc) in PAGES.items():
-    p = probe.get(name, {})
-    title = TITLES.get(name) or p.get("title") or name
-    title = re.sub(r"\s*[|—–]\s*$", "", title).strip()
-    # прибираємо довгі хвости типу "— сторінка ..."
-    if len(title) > 70:
-        title = title[:67].rstrip() + "…"
-    upd = (p.get("updated") or "")[:10]
-    cards.append({
-        "name": name, "title": title, "desc": desc, "cat": cat,
-        "url": f"https://fil-m.github.io/{name}/",
-        "repo": f"https://github.com/Fil-m/{name}",
-        "upd": upd,
-    })
-
-order = {k: i for i, k in enumerate(CATS)}
-cards.sort(key=lambda c: (order[c["cat"]], c["name"].lower()))
-
-data_json = json.dumps(cards, ensure_ascii=False)
+def get_json(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Fil-m-pages-hub"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return json.loads(r.read().decode("utf-8"))
 
 
-def esc(s):
-    return html.escape(s, quote=True)
+def probe(repo):
+    name = repo["name"]
+    urls = [u for u in [repo.get("homepage")] if u] + [f"{BASE}/{name}/"]
+    last = None
+    for u in urls:
+        try:
+            req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=15) as r:
+                code, final = r.status, r.geturl()
+                raw = r.read(150000).decode("utf-8", "ignore")
+            title = re.search(r"<title[^>]*>(.*?)</title>", raw, re.S | re.I)
+            desc = (
+                re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']', raw, re.S | re.I)
+                or re.search(r'<meta[^>]+content=["\'](.*?)["\'][^>]+name=["\']description["\']', raw, re.S | re.I)
+                or re.search(r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\'](.*?)["\']', raw, re.S | re.I)
+            )
+            clean = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", s)).strip() if s else ""
+            return {
+                "name": name, "url": final, "status": code,
+                "title": clean(title.group(1)) if title else "",
+                "meta": clean(desc.group(1)) if desc else "",
+                "repo_desc": repo.get("description") or "",
+                "updated": (repo.get("updated_at") or "")[:10],
+            }
+        except Exception as e:
+            last = {"name": name, "url": u, "status": 0, "err": type(e).__name__,
+                    "title": "", "meta": "", "repo_desc": repo.get("description") or "",
+                    "updated": (repo.get("updated_at") or "")[:10]}
+    return last
 
 
-cards_html = []
-for c in cards:
-    cat_name, color = CATS[c["cat"]]
-    cards_html.append(f"""
+def collect():
+    repos = get_json(f"https://api.github.com/users/{USER}/repos?per_page=100&sort=updated")
+    todo = [r for r in repos if r.get("has_pages") or r.get("homepage")]
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        got = [x for x in ex.map(probe, todo) if x and x.get("status") == 200]
+    return got
+
+
+def build(pages):
+    cards = []
+    for p in pages:
+        name = p["name"]
+        if name in CURATED:
+            cat, title, desc = CURATED[name]
+        else:
+            cat = "tools"
+            title = p.get("title") or name
+            desc = p.get("repo_desc") or p.get("meta") or "Сторінка проєкту на GitHub Pages."
+        cards.append({
+            "name": name, "title": title, "desc": desc, "cat": cat,
+            "url": p.get("url") or f"{BASE}/{name}/",
+            "repo": f"https://github.com/{USER}/{name}",
+            "upd": p.get("updated", ""),
+        })
+
+    order = {k: i for i, k in enumerate(CATS)}
+    cards.sort(key=lambda c: (order.get(c["cat"], 99), c["name"].lower()))
+
+    esc = lambda s: html.escape(str(s), quote=True)
+    blocks = []
+    for c in cards:
+        cat_name, color = CATS.get(c["cat"], CATS["tools"])
+        blocks.append(f"""
     <article class="card" data-cat="{c['cat']}" data-search="{esc((c['title'] + ' ' + c['desc'] + ' ' + c['name']).lower())}">
       <div class="top"><span class="dot" style="--c:{color}"></span>
         <span class="cat" style="color:{color}">{esc(cat_name)}</span>
@@ -107,23 +141,24 @@ for c in cards:
       <h2>{esc(c['title'])}</h2>
       <p>{esc(c['desc'])}</p>
       <div class="links">
-        <a class="open" href="{c['url']}" target="_blank" rel="noopener">Відкрити →</a>
-        <a class="gh" href="{c['repo']}" target="_blank" rel="noopener" title="Репозиторій">git</a>
+        <a class="open" href="{esc(c['url'])}" target="_blank" rel="noopener">Відкрити →</a>
+        <a class="gh" href="{esc(c['repo'])}" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>""")
 
-filters = ['<button class="chip active" data-f="all">Усі · %d</button>' % len(cards)]
-for key, (nm, color) in CATS.items():
-    n = sum(1 for c in cards if c["cat"] == key)
-    filters.append(f'<button class="chip" data-f="{key}" style="--c:{color}">{esc(nm)} · {n}</button>')
+    chips = [f'<button class="chip active" data-f="all">Усі · {len(cards)}</button>']
+    for key, (nm, color) in CATS.items():
+        n = sum(1 for c in cards if c["cat"] == key)
+        chips.append(f'<button class="chip" data-f="{key}" style="--c:{color}">{esc(nm)} · {n}</button>')
 
-HTML = f"""<!doctype html>
+    today = datetime.date.today().isoformat()
+    return f"""<!doctype html>
 <html lang="uk">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fil-m — усі сторінки</title>
-<meta name="description" content="Хаб усіх проєктів і сторінок Тараса Москаленка на github.io: ігри, спільнота, анімація, творчість, інструменти.">
+<title>{USER} — усі сторінки</title>
+<meta name="description" content="Хаб усіх проєктів і сторінок {USER} на github.io: ігри, спільнота, анімація, творчість, інструменти.">
 <style>
   :root {{ --bg:#0c0e13; --card:#151922; --card2:#1b202b; --fg:#e9ecf3; --mut:#8b93a7; --acc:#7c9cff; }}
   * {{ box-sizing:border-box; }}
@@ -166,19 +201,19 @@ HTML = f"""<!doctype html>
 <body>
 <header>
   <div class="kicker">github.io</div>
-  <h1>Усі сторінки Філа</h1>
+  <h1>Усі сторінки</h1>
   <p class="sub">{len(cards)} живих проєктів: ігри, спільнота, анімація для дітей, творчість та інструменти.
   Усе — статичні сторінки на GitHub Pages, без бекенду.</p>
   <div class="search"><input id="q" type="search" placeholder="Пошук: назва, опис, тема…" autocomplete="off"></div>
-  <div class="chips">{''.join(filters)}</div>
+  <div class="chips">{''.join(chips)}</div>
 </header>
 <main id="grid">
-{''.join(cards_html)}
+{''.join(blocks)}
   <div class="empty" id="empty">Нічого не знайдено. Спробуй інше слово.</div>
 </main>
 <footer>
-  <p>Оновлено {__import__('datetime').date.today().isoformat()} · <a href="https://github.com/Fil-m">github.com/Fil-m</a> ·
-  репозиторій цієї сторінки: <a href="https://github.com/Fil-m/fil-m.github.io">fil-m.github.io</a></p>
+  <p>Оновлено {today} · <a href="https://github.com/{USER}">github.com/{USER}</a> ·
+  <a href="https://github.com/{USER}/{USER.lower()}.github.io">код цієї сторінки</a></p>
 </footer>
 <script>
 const cards=[...document.querySelectorAll('.card')];
@@ -203,6 +238,17 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
 </html>
 """
 
-open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(HTML)
-open(os.path.join(HERE, ".nojekyll"), "w").write("")
-print("index.html", len(HTML), "байт ·", len(cards), "сторінок")
+
+def main():
+    pages = collect()
+    out = build(pages)
+    path = os.path.join(HERE, "index.html")
+    open(path, "w", encoding="utf-8").write(out)
+    open(os.path.join(HERE, ".nojekyll"), "w").write("")
+    json.dump(pages, open(os.path.join(HERE, "pages.json"), "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    print(f"index.html: {len(out)} байт · {len(pages)} сторінок")
+
+
+if __name__ == "__main__":
+    main()
