@@ -206,7 +206,7 @@ def collect():
     return live, dead
 
 
-def build(live, dead, server):
+def build(live, dead):
     cards = []
     for p in live:
         name = p["name"]
@@ -221,22 +221,20 @@ def build(live, dead, server):
             "url": p.get("url") or f"{BASE}/{name}/",
             "repo": f"https://github.com/{USER}/{name}",
             "upd": p.get("updated", ""), "pages": p.get("pages") or [],
+            "site": True,
         })
 
-    for s in server.get("sites", []):
-        host = s["domain"].replace(".116-203-217-173.sslip.io", "")
-        pages = s.get("pages") or []
-        if not pages and s.get("status") != 200:
-            continue
+    for d in dead:
+        name = d["name"]
+        if name in CURATED:
+            cat, title, desc = CURATED[name]
+        else:
+            cat, title, desc = "tools", name, d["desc"]
         cards.append({
-            "name": host,
-            "title": s.get("title") or host,
-            "desc": "Сервер · " + s["domain"] + ("" if pages else " · застосунок (не статичні файли)"),
-            "cat": "server",
-            "url": f"https://{s['domain']}/",
-            "repo": "",
-            "upd": max([p["date"] for p in pages], default=""),
-            "pages": [{"short": p["path"], "url": p["url"], "date": p["date"]} for p in pages],
+            "name": name, "title": title, "desc": desc, "cat": cat,
+            "url": f"https://github.com/{USER}/{name}",
+            "repo": f"https://github.com/{USER}/{name}",
+            "upd": d.get("updated", ""), "pages": [], "site": False,
         })
 
     order = {k: i for i, k in enumerate(CATS)}
@@ -260,17 +258,20 @@ def build(live, dead, server):
         pages_html = ('<div class="pages"><span class="plabel">сторінки:</span> ' + " ".join(items) + more + "</div>") if items else ""
         search = (c["title"] + " " + c["desc"] + " " + c["name"] + " " + " ".join(p["short"] for p in pages)).lower()
         gh = (f'<a class="gh" href="{esc(c["repo"])}" target="_blank" rel="noopener" title="Репозиторій">git</a>'
-              if c["repo"] else "")
+              if c["repo"] and c["site"] else "")
+        label = "Відкрити →" if c.get("site") else "Репозиторій →"
+        badge = "" if c.get("site") else '<span class="badge">без сторінки</span>'
         blocks.append(f"""
     <article class="card" data-cat="{c['cat']}" data-search="{esc(search)}">
       <div class="top"><span class="dot" style="--c:{color}"></span>
         <span class="cat" style="color:{color}">{esc(cat_name)}</span>
+        {badge}
         <span class="upd">{esc(c['upd'])}</span></div>
       <h2>{esc(c['title'])}</h2>
       <p>{esc(c['desc'])}</p>
       {pages_html}
       <div class="links">
-        <a class="open" href="{esc(c['url'])}" target="_blank" rel="noopener">Відкрити →</a>
+        <a class="open" href="{esc(c['url'])}" target="_blank" rel="noopener">{label}</a>
         {gh}
       </div>
     </article>""")
@@ -291,8 +292,7 @@ def build(live, dead, server):
         chips.append(f'<button class="chip" data-f="{key}" style="--c:{color}">{esc(nm)} · {n}</button>')
 
     total_pages = sum(len(c["pages"]) for c in cards)
-    n_srv = sum(1 for c in cards if c["cat"] == "server")
-    n_gh = len(cards) - n_srv
+    n_site = sum(1 for c in cards if c.get("site"))
     today = datetime.date.today().isoformat()
     return f"""<!doctype html>
 <html lang="uk">
@@ -339,6 +339,7 @@ def build(live, dead, server):
   .pdate {{ color:#5f6879; font-size:11px; margin-left:4px; }}
   .new {{ background:#1f3a2a; color:#6ee7a8; font-size:10px; padding:1px 5px; border-radius:6px; margin-left:4px; }}
   .more {{ color:#5f6879; }}
+  .badge {{ background:#2a2233; color:#c9a6e0; font-size:10px; padding:2px 6px; border-radius:6px; }}
   .links {{ display:flex; align-items:center; gap:10px; margin-top:12px; }}
   .open {{ color:var(--acc); text-decoration:none; font-weight:600; font-size:14px; }}
   .open:hover {{ text-decoration:underline; }}
@@ -372,10 +373,9 @@ def build(live, dead, server):
   <p class="sub">Кожен html-файл, який реально публікується з репозиторіїв:
   назва, дата останньої зміни, пряме посилання. Новіші за головну позначені «нове».</p>
   <div class="stats">
-    <div class="stat"><b>{n_gh}</b> GitHub-сайтів</div>
-    <div class="stat"><b>{n_srv}</b> на сервері</div>
-    <div class="stat"><b>{total_pages}</b> сторінок усього</div>
-    <div class="stat"><b>{len(dead)}</b> репо без сторінки</div>
+    <div class="stat"><b>{len(cards)}</b> проєктів</div>
+    <div class="stat"><b>{n_site}</b> зі сторінкою</div>
+    <div class="stat"><b>{total_pages}</b> сторінок</div>
   </div>
   <div class="search"><input id="q" type="search" placeholder="Пошук: назва, сторінка, опис…" autocomplete="off"></div>
   <div class="chips">{''.join(chips)}</div>
@@ -385,22 +385,13 @@ def build(live, dead, server):
   <div class="empty" id="empty">Нічого не знайдено. Спробуй інше слово.</div>
 </main>
 
-<section class="section" id="dead">
-  <h3>Репозиторії без опублікованої сторінки · {len(dead)}</h3>
-  <p class="hint">Код є, GitHub Pages не увімкнений (або сторінка не збирається). Клік веде в репозиторій.</p>
-  <div class="rows" id="deadrows">
-{''.join(dead_rows)}
-  </div>
-</section>
-
 <footer>
   <p>Оновлено {today} · <a href="https://github.com/{USER}">github.com/{USER}</a> ·
   <a href="https://github.com/{USER}/{SELF_REPO}">код цієї сторінки</a></p>
 </footer>
 <script>
 const cards=[...document.querySelectorAll('.card')];
-const rows=[...document.querySelectorAll('.row')];
-const q=document.getElementById('q'), empty=document.getElementById('empty'), dead=document.getElementById('dead');
+const q=document.getElementById('q'), empty=document.getElementById('empty');
 let cat='all';
 function apply(){{
   const s=q.value.trim().toLowerCase(); let n=0;
@@ -409,13 +400,7 @@ function apply(){{
     const okQ = !s || c.dataset.search.includes(s);
     const show = okCat && okQ; c.style.display = show?'':'none'; if(show) n++;
   }});
-  let m=0;
-  rows.forEach(r=>{{
-    const show = (!s || r.dataset.search.includes(s)) && cat==='all';
-    r.style.display = show?'':'none'; if(show) m++;
-  }});
-  dead.style.display = m?'block':'none';
-  empty.style.display = (n||m)?'none':'block';
+  empty.style.display = n?'none':'block';
 }}
 q.addEventListener('input',apply);
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
@@ -430,11 +415,7 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
 
 def main():
     live, dead = collect()
-    sp = os.path.join(HERE, "server_pages.json")
-    server = {"sites": []}
-    if os.path.exists(sp):
-        server = json.load(open(sp, encoding="utf-8"))
-    out = build(live, dead, server)
+    out = build(live, dead)
     open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(out)
     open(os.path.join(HERE, ".nojekyll"), "w").write("")
     json.dump({"live": live, "dead": dead}, open(os.path.join(HERE, "pages.json"), "w", encoding="utf-8"),
