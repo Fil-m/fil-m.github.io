@@ -8,7 +8,14 @@
    "meta": "",
    "repo_desc": "Pixel Flow clone + photo level generator",
    "updated": "2026-10-27",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/pixel-flow/",
+     "date": "2026-10-27"
+    }
+   ]
   },
   {
    "name": "flow-editor",
@@ -18,8 +25,13 @@
    "meta": "",
    "repo_desc": "Flow Edit — міні-редактор відео для «Шляху Потоку» (таймлайн + CSS-візуали)",
    "updated": "2026-10-17",
-   "subs": [
-    "https://fil-m.github.io/flow-editor/${API}${s.video}"
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/flow-editor/",
+     "date": "2026-10-17"
+    }
    ]
   },
   {
@@ -30,7 +42,14 @@
    "meta": "",
    "repo_desc": "Спільнота — суспільна мережа в стилі ВК 2013. Без сервера: дані в JSON-файлах репо через GitHub API.",
    "updated": "2026-09-25",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/spilnota/",
+     "date": "2026-09-25"
+    }
+   ]
   },
   {
    "name": "element-game",
@@ -40,7 +59,14 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-09-05",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/element-game/",
+     "date": "2026-09-05"
+    }
+   ]
   },
   {
    "name": "context",
@@ -50,7 +76,14 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-08-19",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/context/",
+     "date": "2026-08-19"
+    }
+   ]
   },
   {
    "name": "ReGo",
@@ -60,7 +93,20 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-08-17",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/ReGo/",
+     "date": "2026-08-17"
+    },
+    {
+     "path": "help.html",
+     "short": "help.html",
+     "url": "https://fil-m.github.io/ReGo/help.html",
+     "date": "2026-08-17"
+    }
+   ]
   },
   {
    "name": "animation-trial",
@@ -70,7 +116,14 @@
    "meta": "За 60–90 хвилин дитина разом із батьками придумає історію, створить героїв, зніме її кадр за кадром — і підете додому з власним фільмом. Онлайн. Перше заняття — безкоштовно.",
    "repo_desc": "",
    "updated": "2026-08-16",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/animation-trial/",
+     "date": "2026-08-16"
+    }
+   ]
   },
   {
    "name": "flow-path",
@@ -80,8 +133,19 @@
    "meta": "Шлях Потоку — світогляд, що бачить світ як процес. Без бога-творця, без догм, без обіцянок безсмертя. Текст із тридцяти розділів.",
    "repo_desc": "",
    "updated": "2026-08-09",
-   "subs": [
-    "https://fil-m.github.io/flow-path/en/"
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/flow-path/",
+     "date": "2026-08-09"
+    },
+    {
+     "path": "en/index.html",
+     "short": "en/index.html",
+     "url": "https://fil-m.github.io/flow-path/en/",
+     "date": "2026-08-09"
+    }
    ]
   },
   {
@@ -92,7 +156,14 @@
    "meta": "",
    "repo_desc": "With U Watching ",
    "updated": "2026-08-08",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/WUW/",
+     "date": "2026-08-08"
+    }
+   ]
   },
   {
    "name": "exchange-scanner-beta",
@@ -102,7 +173,14 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-08-05",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/exchange-scanner-beta/",
+     "date": "2026-08-04"
+    }
+   ]
   },
   {
    "name": "exchange-scanner",
@@ -112,7 +190,14 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-08-05",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/exchange-scanner/",
+     "date": "2026-08-04"
+    }
+   ]
   },
   {
    "name": "animation-workshop",
@@ -122,11 +207,37 @@
    "meta": "Безкоштовна анімаційна майстерня stop-motion для батьків і дітей 6–12 років у Karlsruhe. 2 суботи на місяць у кав",
    "repo_desc": "🎬 Безкоштовна анімаційна майстерня stop-motion для батьків і дітей у Karlsruhe. 2 суботи на місяць у кав'ярні Ja, genau!",
    "updated": "2026-07-28",
-   "subs": [
-    "https://fil-m.github.io/animation-workshop/index.html",
-    "https://fil-m.github.io/animation-workshop/de.html",
-    "https://fil-m.github.io/animation-workshop/impressum.html",
-    "https://fil-m.github.io/animation-workshop/datenschutz.html"
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/animation-workshop/",
+     "date": "2026-07-28"
+    },
+    {
+     "path": "de.html",
+     "short": "de.html",
+     "url": "https://fil-m.github.io/animation-workshop/de.html",
+     "date": "2026-07-28"
+    },
+    {
+     "path": "poster.html",
+     "short": "poster.html",
+     "url": "https://fil-m.github.io/animation-workshop/poster.html",
+     "date": "2026-07-06"
+    },
+    {
+     "path": "impressum.html",
+     "short": "impressum.html",
+     "url": "https://fil-m.github.io/animation-workshop/impressum.html",
+     "date": "2026-07-04"
+    },
+    {
+     "path": "datenschutz.html",
+     "short": "datenschutz.html",
+     "url": "https://fil-m.github.io/animation-workshop/datenschutz.html",
+     "date": "2026-07-04"
+    }
    ]
   },
   {
@@ -137,7 +248,14 @@
    "meta": "Керуйте пістолетом за допомогою фізики віддачі. Летіть, крутіться, знищуйте ворогів!",
    "repo_desc": "",
    "updated": "2026-07-27",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/recoil-game/",
+     "date": "2026-06-07"
+    }
+   ]
   },
   {
    "name": "habitat-os-test",
@@ -147,7 +265,14 @@
    "meta": "",
    "repo_desc": "Habitat OS — Test platform with Match-3, Git chat, shop, skins",
    "updated": "2026-07-16",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/habitat-os-test/",
+     "date": "2026-06-03"
+    }
+   ]
   },
   {
    "name": "portfolio-page",
@@ -157,8 +282,25 @@
    "meta": "Тарас Москаленко — спеціаліст з розвитку. Анімація для дітей, 3D-друк, гейм-девелопмент, творчість, психологія.",
    "repo_desc": "Персональна сторінка-портфоліо Тараса Москаленка",
    "updated": "2026-07-08",
-   "subs": [
-    "https://fil-m.github.io/portfolio-page/index-de.html"
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/portfolio-page/",
+     "date": "2026-07-08"
+    },
+    {
+     "path": "index-de.html",
+     "short": "index-de.html",
+     "url": "https://fil-m.github.io/portfolio-page/index-de.html",
+     "date": "2026-07-08"
+    },
+    {
+     "path": "poster.html",
+     "short": "poster.html",
+     "url": "https://fil-m.github.io/portfolio-page/poster.html",
+     "date": "2026-07-05"
+    }
    ]
   },
   {
@@ -169,10 +311,43 @@
    "meta": "",
    "repo_desc": "🎮 Дитячі навчальні ігри: абетка, цифри, рахунок, кольори",
    "updated": "2026-07-05",
-   "subs": [
-    "https://fil-m.github.io/kids-games/wonder-tablet/",
-    "https://fil-m.github.io/kids-games/letter-learn/",
-    "https://fil-m.github.io/kids-games/math-play/"
+   "pages": [
+    {
+     "path": "wonder-tablet/index.html",
+     "short": "wonder-tablet/index.html",
+     "url": "https://fil-m.github.io/kids-games/wonder-tablet/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "math-play/ten-frame.html",
+     "short": "math-play/ten-frame.html",
+     "url": "https://fil-m.github.io/kids-games/math-play/ten-frame.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "math-play/lava-runner.html",
+     "short": "math-play/lava-runner.html",
+     "url": "https://fil-m.github.io/kids-games/math-play/lava-runner.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "math-play/index.html",
+     "short": "math-play/index.html",
+     "url": "https://fil-m.github.io/kids-games/math-play/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "letter-learn/index.html",
+     "short": "letter-learn/index.html",
+     "url": "https://fil-m.github.io/kids-games/letter-learn/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/kids-games/",
+     "date": "2026-07-05"
+    }
    ]
   },
   {
@@ -183,8 +358,25 @@
    "meta": "Професійне менторство з анімації для дітей 7-18 років. ADHD-friendly підхід, підготовка до міжнародних фестивалів (Annecy, Zlín). Режисер та психолог Тарас Москаленко.",
    "repo_desc": "",
    "updated": "2026-07-05",
-   "subs": [
-    "https://fil-m.github.io/animation_mentors/partners.html"
+   "pages": [
+    {
+     "path": "partners.html",
+     "short": "partners.html",
+     "url": "https://fil-m.github.io/animation_mentors/partners.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/animation_mentors/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "festivals.html",
+     "short": "festivals.html",
+     "url": "https://fil-m.github.io/animation_mentors/festivals.html",
+     "date": "2026-04-06"
+    }
    ]
   },
   {
@@ -195,9 +387,25 @@
    "meta": "",
    "repo_desc": "Стіна 3D друкарня — бюджетна волонтерська 3D-ферма в Карлсруе",
    "updated": "2026-07-05",
-   "subs": [
-    "https://fil-m.github.io/stina-3d/index.html",
-    "https://fil-m.github.io/stina-3d/de.html"
+   "pages": [
+    {
+     "path": "poster.html",
+     "short": "poster.html",
+     "url": "https://fil-m.github.io/stina-3d/poster.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/stina-3d/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "de.html",
+     "short": "de.html",
+     "url": "https://fil-m.github.io/stina-3d/de.html",
+     "date": "2026-07-03"
+    }
    ]
   },
   {
@@ -208,10 +416,43 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-07-05",
-   "subs": [
-    "https://fil-m.github.io/diya-do-mriyi/index-de.html",
-    "https://fil-m.github.io/diya-do-mriyi/impressum.html",
-    "https://fil-m.github.io/diya-do-mriyi/datenschutz.html"
+   "pages": [
+    {
+     "path": "poster.html",
+     "short": "poster.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/poster.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "index-de.html",
+     "short": "index-de.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/index-de.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "impressum.html",
+     "short": "impressum.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/impressum.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "datenschutz.html",
+     "short": "datenschutz.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/datenschutz.html",
+     "date": "2026-07-05"
+    },
+    {
+     "path": "stina-3d/index.html",
+     "short": "stina-3d/index.html",
+     "url": "https://fil-m.github.io/diya-do-mriyi/stina-3d/",
+     "date": "2026-07-03"
+    }
    ]
   },
   {
@@ -222,7 +463,44 @@
    "meta": "",
    "repo_desc": "Infinity Braves — Support group for neurodivergent adults / Gruppe für neurodivergente Erwachsene / Група підтримки нейровідмінних дорослих",
    "updated": "2026-07-03",
-   "subs": []
+   "pages": [
+    {
+     "path": "discover_ua.html",
+     "short": "discover_ua.html",
+     "url": "https://fil-m.github.io/--braves/discover_ua.html",
+     "date": "2026-07-03"
+    },
+    {
+     "path": "discover_ua_v3.html",
+     "short": "discover_ua_v3.html",
+     "url": "https://fil-m.github.io/--braves/discover_ua_v3.html",
+     "date": "2026-03-06"
+    },
+    {
+     "path": "discover_v3.html",
+     "short": "discover_v3.html",
+     "url": "https://fil-m.github.io/--braves/discover_v3.html",
+     "date": "2026-03-04"
+    },
+    {
+     "path": "discover_de_en.html",
+     "short": "discover_de_en.html",
+     "url": "https://fil-m.github.io/--braves/discover_de_en.html",
+     "date": "2026-02-21"
+    },
+    {
+     "path": "discover.html",
+     "short": "discover.html",
+     "url": "https://fil-m.github.io/--braves/discover.html",
+     "date": "2026-02-21"
+    },
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/--braves/",
+     "date": "2026-02-20"
+    }
+   ]
   },
   {
    "name": "art-picnic",
@@ -232,7 +510,14 @@
    "meta": "Щомісячний безкоштовний арт-пікнік для родин: знімаємо кліп або стопмоушен, монтуємо на місці, влаштовуємо прем",
    "repo_desc": "",
    "updated": "2026-07-03",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/art-picnic/",
+     "date": "2026-07-03"
+    }
+   ]
   },
   {
    "name": "hermonoid",
@@ -242,7 +527,14 @@
    "meta": "Hermonoid — веб-чат для Hermes Agent. Працює на Android через Termux. Одна команда для встановлення.",
    "repo_desc": "Web chat UI for Hermes Agent on Android",
    "updated": "2026-06-18",
-   "subs": []
+   "pages": [
+    {
+     "path": "docs/index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/hermonoid/",
+     "date": "2026-06-11"
+    }
+   ]
   },
   {
    "name": "bitsprite",
@@ -252,7 +544,20 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-06-14",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/bitsprite/",
+     "date": "2026-05-19"
+    },
+    {
+     "path": "showroom.html",
+     "short": "showroom.html",
+     "url": "https://fil-m.github.io/bitsprite/showroom.html",
+     "date": "2026-05-18"
+    }
+   ]
   },
   {
    "name": "habitat-os-workshop",
@@ -262,7 +567,38 @@
    "meta": "",
    "repo_desc": "Майстерня платформи Habitat OS",
    "updated": "2026-06-05",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/habitat-os-workshop/",
+     "date": "2026-06-05"
+    },
+    {
+     "path": "game-editor.html",
+     "short": "game-editor.html",
+     "url": "https://fil-m.github.io/habitat-os-workshop/game-editor.html",
+     "date": "2026-06-05"
+    },
+    {
+     "path": "evo.html",
+     "short": "evo.html",
+     "url": "https://fil-m.github.io/habitat-os-workshop/evo.html",
+     "date": "2026-06-05"
+    },
+    {
+     "path": "evo-editor.html",
+     "short": "evo-editor.html",
+     "url": "https://fil-m.github.io/habitat-os-workshop/evo-editor.html",
+     "date": "2026-06-05"
+    },
+    {
+     "path": "evo-editor-v2.html",
+     "short": "evo-editor-v2.html",
+     "url": "https://fil-m.github.io/habitat-os-workshop/evo-editor-v2.html",
+     "date": "2026-06-05"
+    }
+   ]
   },
   {
    "name": "akira-mental-math",
@@ -272,7 +608,14 @@
    "meta": "",
    "repo_desc": "Akira — генератор вправ для ментальної арифметики на абакусі",
    "updated": "2026-05-27",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/akira-mental-math/",
+     "date": "2026-05-27"
+    }
+   ]
   },
   {
    "name": "mine-avatar-hub",
@@ -282,7 +625,26 @@
    "meta": "Сучасна розподілена безсерверна ігрова екосистема з локальним збереженням IndexedDB, безпечною пісочницею та синхронізацією через Git або радіомережу EME.",
    "repo_desc": "",
    "updated": "2026-05-21",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/mine-avatar-hub/",
+     "date": "2026-05-21"
+    },
+    {
+     "path": "games/somatic/index.html",
+     "short": "games/somatic/index.html",
+     "url": "https://fil-m.github.io/mine-avatar-hub/games/somatic/",
+     "date": "2026-05-21"
+    },
+    {
+     "path": "games/match3/index.html",
+     "short": "games/match3/index.html",
+     "url": "https://fil-m.github.io/mine-avatar-hub/games/match3/",
+     "date": "2026-05-20"
+    }
+   ]
   },
   {
    "name": "aim-lab-scientist",
@@ -292,7 +654,14 @@
    "meta": "",
    "repo_desc": "",
    "updated": "2026-05-12",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/aim-lab-scientist/",
+     "date": "2026-05-12"
+    }
+   ]
   },
   {
    "name": "Memology-Website-UA",
@@ -302,7 +671,14 @@
    "meta": "П",
    "repo_desc": "",
    "updated": "2026-04-18",
-   "subs": []
+   "pages": [
+    {
+     "path": "index.html",
+     "short": "index.html",
+     "url": "https://fil-m.github.io/Memology-Website-UA/",
+     "date": "2026-04-18"
+    }
+   ]
   }
  ],
  "dead": [

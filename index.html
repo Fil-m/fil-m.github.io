@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fil-m — усі сторінки</title>
-<meta name="description" content="Повний каталог Fil-m: живі сторінки GitHub Pages, підсторінки та репозиторії без опублікованої сторінки.">
+<meta name="description" content="Повний каталог Fil-m: усі html-сторінки в опублікованих репозиторіях, з датами, і репозиторії без сторінки.">
 <style>
   :root { --bg:#0c0e13; --card:#151922; --card2:#1b202b; --fg:#e9ecf3; --mut:#8b93a7; --acc:#7c9cff; }
   * { box-sizing:border-box; }
@@ -13,7 +13,7 @@
   header { padding:44px 20px 18px; max-width:1100px; margin:0 auto; }
   .kicker { color:var(--mut); font-size:13px; letter-spacing:.14em; text-transform:uppercase; }
   h1 { font-size:clamp(28px,6vw,44px); margin:8px 0 6px; letter-spacing:-.02em; }
-  .sub { color:var(--mut); max-width:680px; }
+  .sub { color:var(--mut); max-width:700px; }
   .stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
   .stat { background:var(--card); border:1px solid #232937; border-radius:12px; padding:10px 14px; font-size:14px; }
   .stat b { color:var(--acc); font-size:18px; }
@@ -26,20 +26,24 @@
            padding:8px 13px; font-size:14px; cursor:pointer; }
   .chip.active { background:var(--card2); border-color:var(--acc); }
   main { max-width:1100px; margin:0 auto; padding:14px 20px 30px;
-          display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+          display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
   .card { background:linear-gradient(180deg,#161b24,#131720); border:1px solid #212836; border-radius:18px;
-           padding:18px; display:flex; flex-direction:column; min-height:190px; transition:.15s; }
-  .card:hover { transform:translateY(-2px); border-color:#2f3a52; }
+           padding:18px; display:flex; flex-direction:column; min-height:190px; }
+  .card:hover { border-color:#2f3a52; }
   .top { display:flex; align-items:center; gap:8px; font-size:12px; }
   .dot { width:8px; height:8px; border-radius:50%; background:var(--c); }
   .cat { font-weight:600; }
   .upd { margin-left:auto; color:#77839a; }
   h2 { font-size:19px; margin:12px 0 6px; line-height:1.25; }
-  .card p { color:#aab2c4; margin:0; flex:1; font-size:14.5px; }
-  .subs { margin-top:10px; font-size:12.5px; color:#7d879c; line-height:1.7; }
-  .subs a { color:#9fb0d0; text-decoration:none; border-bottom:1px dotted #3a4459; }
-  .subs a:hover { color:var(--fg); }
-  .links { display:flex; align-items:center; gap:10px; margin-top:14px; }
+  .card > p { color:#aab2c4; margin:0 0 10px; flex:1; font-size:14.5px; }
+  .pages { font-size:13px; line-height:1.9; color:#8d97ab; border-top:1px solid #202634; padding-top:10px; }
+  .plabel { color:#5f6879; }
+  .pages a { color:#b9c6e2; text-decoration:none; white-space:nowrap; margin-right:8px; }
+  .pages a:hover { color:#fff; }
+  .pdate { color:#5f6879; font-size:11px; margin-left:4px; }
+  .new { background:#1f3a2a; color:#6ee7a8; font-size:10px; padding:1px 5px; border-radius:6px; margin-left:4px; }
+  .more { color:#5f6879; }
+  .links { display:flex; align-items:center; gap:10px; margin-top:12px; }
   .open { color:var(--acc); text-decoration:none; font-weight:600; font-size:14px; }
   .open:hover { text-decoration:underline; }
   .gh { margin-left:auto; color:#6d768a; text-decoration:none; font-size:12px; border:1px solid #2a3140;
@@ -69,349 +73,349 @@
 <header>
   <div class="kicker">github.io</div>
   <h1>Усі сторінки</h1>
-  <p class="sub">Повний каталог: живі сайти на GitHub Pages, їхні внутрішні сторінки
-  і репозиторії, які ще не опубліковані як сторінка.</p>
+  <p class="sub">Кожен html-файл, який реально публікується з репозиторіїв:
+  назва, дата останньої зміни, пряме посилання. Новіші за головну позначені «нове».</p>
   <div class="stats">
-    <div class="stat"><b>28</b> живих сайтів</div>
-    <div class="stat"><b>44</b> сторінок усього</div>
+    <div class="stat"><b>28</b> сайтів</div>
+    <div class="stat"><b>62</b> html-сторінок</div>
     <div class="stat"><b>14</b> репо без сторінки</div>
   </div>
-  <div class="search"><input id="q" type="search" placeholder="Пошук: назва, опис, тема…" autocomplete="off"></div>
+  <div class="search"><input id="q" type="search" placeholder="Пошук: назва, сторінка, опис…" autocomplete="off"></div>
   <div class="chips"><button class="chip active" data-f="all">Усі · 28</button><button class="chip" data-f="games" style="--c:#7c9cff">Ігри · 11</button><button class="chip" data-f="community" style="--c:#4fd1a5">Спільнота · 5</button><button class="chip" data-f="kids" style="--c:#ffb454">Анімація й діти · 3</button><button class="chip" data-f="creative" style="--c:#e07bff">Творчість · 4</button><button class="chip" data-f="tools" style="--c:#5ec8e5">Інструменти · 5</button></div>
 </header>
 <main id="grid">
 
-    <article class="card" data-cat="games" data-search="neuroaim lab neuroaim lab — тренажер прицілювання з науковим підходом: заміри, серії, статистика. aim-lab-scientist">
+    <article class="card" data-cat="games" data-search="neuroaim lab neuroaim lab — тренажер прицілювання з науковим підходом: заміри, серії, статистика. aim-lab-scientist index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-05-12</span></div>
       <h2>NeuroAim Lab</h2>
       <p>NeuroAim Lab — тренажер прицілювання з науковим підходом: заміри, серії, статистика.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/aim-lab-scientist/" target="_blank" rel="noopener">index.html<span class="pdate">05.12</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/aim-lab-scientist/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/aim-lab-scientist" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="кабалок — кристал кабалок — кристал: маленький піксельний експеримент. bitsprite">
+    <article class="card" data-cat="games" data-search="кабалок — кристал кабалок — кристал: маленький піксельний експеримент. bitsprite index.html showroom.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-06-14</span></div>
       <h2>КАБАЛОК — Кристал</h2>
       <p>КАБАЛОК — Кристал: маленький піксельний експеримент.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/bitsprite/" target="_blank" rel="noopener">index.html<span class="pdate">05.19</span></a> <a href="https://fil-m.github.io/bitsprite/showroom.html" target="_blank" rel="noopener">showroom.html<span class="pdate">05.18</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/bitsprite/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/bitsprite" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="context v3 — тіло context v3 «тіло»: три слоти, збірка як рух, довгий тап — розібрати. context">
+    <article class="card" data-cat="games" data-search="context v3 — тіло context v3 «тіло»: три слоти, збірка як рух, довгий тап — розібрати. context index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-08-19</span></div>
       <h2>CONTEXT v3 — Тіло</h2>
       <p>CONTEXT v3 «Тіло»: три слоти, збірка як рух, довгий тап — розібрати.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/context/" target="_blank" rel="noopener">index.html<span class="pdate">08.19</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/context/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/context" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="element world element world — пісочниця, де з чотирьох стихій збираються нові елементи. element-game">
+    <article class="card" data-cat="games" data-search="element world element world — пісочниця, де з чотирьох стихій збираються нові елементи. element-game index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-09-05</span></div>
       <h2>Element World</h2>
       <p>Element World — пісочниця, де з чотирьох стихій збираються нові елементи.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/element-game/" target="_blank" rel="noopener">index.html<span class="pdate">09.05</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/element-game/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/element-game" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="habitat os — тест habitat os — тестовий майданчик платформи: match-3, чат через git, магазин, скіни. habitat-os-test">
+    <article class="card" data-cat="games" data-search="habitat os — тест habitat os — тестовий майданчик платформи: match-3, чат через git, магазин, скіни. habitat-os-test index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-07-16</span></div>
       <h2>Habitat OS — тест</h2>
       <p>Habitat OS — тестовий майданчик платформи: Match-3, чат через Git, магазин, скіни.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/habitat-os-test/" target="_blank" rel="noopener">index.html<span class="pdate">06.03</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/habitat-os-test/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/habitat-os-test" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="habitat os — майстерня майстерня habitat os — робоча версія платформи для збірки й експериментів. habitat-os-workshop">
+    <article class="card" data-cat="games" data-search="habitat os — майстерня майстерня habitat os — робоча версія платформи для збірки й експериментів. habitat-os-workshop index.html game-editor.html evo.html evo-editor.html evo-editor-v2.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-06-05</span></div>
       <h2>Habitat OS — майстерня</h2>
       <p>Майстерня Habitat OS — робоча версія платформи для збірки й експериментів.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/habitat-os-workshop/" target="_blank" rel="noopener">index.html<span class="pdate">06.05</span></a> <a href="https://fil-m.github.io/habitat-os-workshop/game-editor.html" target="_blank" rel="noopener">game-editor.html<span class="pdate">06.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/habitat-os-workshop/evo.html" target="_blank" rel="noopener">evo.html<span class="pdate">06.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/habitat-os-workshop/evo-editor.html" target="_blank" rel="noopener">evo-editor.html<span class="pdate">06.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/habitat-os-workshop/evo-editor-v2.html" target="_blank" rel="noopener">evo-editor-v2.html<span class="pdate">06.05</span> <span class="new">нове</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/habitat-os-workshop/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/habitat-os-workshop" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="дитячі ігри дитячі навчальні ігри: абетка, цифри, рахунок, кольори. великі кнопки, без реклами. kids-games">
+    <article class="card" data-cat="games" data-search="дитячі ігри дитячі навчальні ігри: абетка, цифри, рахунок, кольори. великі кнопки, без реклами. kids-games wonder-tablet/index.html math-play/ten-frame.html math-play/lava-runner.html math-play/index.html letter-learn/index.html index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-07-05</span></div>
       <h2>Дитячі ігри</h2>
       <p>Дитячі навчальні ігри: абетка, цифри, рахунок, кольори. Великі кнопки, без реклами.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/kids-games/wonder-tablet/" target="_blank" rel="noopener">wonder-tablet</a> · <a href="https://fil-m.github.io/kids-games/letter-learn/" target="_blank" rel="noopener">letter-learn</a> · <a href="https://fil-m.github.io/kids-games/math-play/" target="_blank" rel="noopener">math-play</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/kids-games/wonder-tablet/" target="_blank" rel="noopener">wonder-tablet/index.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/kids-games/math-play/ten-frame.html" target="_blank" rel="noopener">math-play/ten-frame.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/kids-games/math-play/lava-runner.html" target="_blank" rel="noopener">math-play/lava-runner.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/kids-games/math-play/" target="_blank" rel="noopener">math-play/index.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/kids-games/letter-learn/" target="_blank" rel="noopener">letter-learn/index.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/kids-games/" target="_blank" rel="noopener">index.html<span class="pdate">07.05</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/kids-games/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/kids-games" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="mine &amp; craft avatar hub mine &amp; craft avatar hub — безсерверна ігрова екосистема з аватарами й локальним збереженням. mine-avatar-hub">
+    <article class="card" data-cat="games" data-search="mine &amp; craft avatar hub mine &amp; craft avatar hub — безсерверна ігрова екосистема з аватарами й локальним збереженням. mine-avatar-hub index.html games/somatic/index.html games/match3/index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-05-21</span></div>
       <h2>Mine &amp; Craft Avatar Hub</h2>
       <p>Mine &amp; Craft Avatar Hub — безсерверна ігрова екосистема з аватарами й локальним збереженням.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/mine-avatar-hub/" target="_blank" rel="noopener">index.html<span class="pdate">05.21</span></a> <a href="https://fil-m.github.io/mine-avatar-hub/games/somatic/" target="_blank" rel="noopener">games/somatic/index.html<span class="pdate">05.21</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/mine-avatar-hub/games/match3/" target="_blank" rel="noopener">games/match3/index.html<span class="pdate">05.20</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/mine-avatar-hub/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/mine-avatar-hub" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="pixel flow головоломка в стилі pixel flow: заливаєш клітинки кольором, поки не збереш малюнок. плюс генератор рівнів із власних фото. pixel-flow">
+    <article class="card" data-cat="games" data-search="pixel flow головоломка в стилі pixel flow: заливаєш клітинки кольором, поки не збереш малюнок. плюс генератор рівнів із власних фото. pixel-flow index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-10-27</span></div>
       <h2>Pixel Flow</h2>
       <p>Головоломка в стилі Pixel Flow: заливаєш клітинки кольором, поки не збереш малюнок. Плюс генератор рівнів із власних фото.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/pixel-flow/" target="_blank" rel="noopener">index.html<span class="pdate">10.27</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/pixel-flow/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/pixel-flow" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="recoil gun recoil gun — аркада, де пістолетом керує фізика віддачі: лети, крутись, збивай ворогів. recoil-game">
+    <article class="card" data-cat="games" data-search="recoil gun recoil gun — аркада, де пістолетом керує фізика віддачі: лети, крутись, збивай ворогів. recoil-game index.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-07-27</span></div>
       <h2>Recoil Gun</h2>
       <p>Recoil Gun — аркада, де пістолетом керує фізика віддачі: лети, крутись, збивай ворогів.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/recoil-game/" target="_blank" rel="noopener">index.html<span class="pdate">06.07</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/recoil-game/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/recoil-game" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="games" data-search="synergy: phase shift 3d synergy: phase shift — 3d-шутер у браузері на node + websocket, із живими кімнатами. rego">
+    <article class="card" data-cat="games" data-search="synergy: phase shift 3d synergy: phase shift — 3d-шутер у браузері на node + websocket, із живими кімнатами. rego index.html help.html">
       <div class="top"><span class="dot" style="--c:#7c9cff"></span>
         <span class="cat" style="color:#7c9cff">Ігри</span>
         <span class="upd">2026-08-17</span></div>
       <h2>SYNERGY: PHASE SHIFT 3D</h2>
       <p>SYNERGY: PHASE SHIFT — 3D-шутер у браузері на Node + WebSocket, із живими кімнатами.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/ReGo/" target="_blank" rel="noopener">index.html<span class="pdate">08.17</span></a> <a href="https://fil-m.github.io/ReGo/help.html" target="_blank" rel="noopener">help.html<span class="pdate">08.17</span> <span class="new">нове</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/ReGo/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/ReGo" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="community" data-search="infinity braves infinity braves — група підтримки для нейровідмінних дорослих. скринінг трьома мовами. --braves">
+    <article class="card" data-cat="community" data-search="infinity braves група підтримки для нейровідмінних дорослих. index.html — стара візитка; робоча частина — discover-опитувальник. --braves discover_ua.html discover_ua_v3.html discover_v3.html discover_de_en.html discover.html index.html">
       <div class="top"><span class="dot" style="--c:#4fd1a5"></span>
         <span class="cat" style="color:#4fd1a5">Спільнота</span>
         <span class="upd">2026-07-03</span></div>
       <h2>Infinity Braves</h2>
-      <p>Infinity Braves — група підтримки для нейровідмінних дорослих. Скринінг трьома мовами.</p>
-      
+      <p>Група підтримки для нейровідмінних дорослих. index.html — стара візитка; робоча частина — discover-опитувальник.</p>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/--braves/discover_ua.html" target="_blank" rel="noopener">discover_ua.html<span class="pdate">07.03</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/--braves/discover_ua_v3.html" target="_blank" rel="noopener">discover_ua_v3.html<span class="pdate">03.06</span></a> <a href="https://fil-m.github.io/--braves/discover_v3.html" target="_blank" rel="noopener">discover_v3.html<span class="pdate">03.04</span></a> <a href="https://fil-m.github.io/--braves/discover_de_en.html" target="_blank" rel="noopener">discover_de_en.html<span class="pdate">02.21</span></a> <a href="https://fil-m.github.io/--braves/discover.html" target="_blank" rel="noopener">discover.html<span class="pdate">02.21</span></a> <a href="https://fil-m.github.io/--braves/" target="_blank" rel="noopener">index.html<span class="pdate">02.20</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/--braves/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/--braves" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="community" data-search="арт пікнік арт пікнік — щомісячна безкоштовна зустріч для родин: знімаємо кліп або стопмоушен. art-picnic">
+    <article class="card" data-cat="community" data-search="арт пікнік арт пікнік — щомісячна безкоштовна зустріч для родин: знімаємо кліп або стопмоушен. art-picnic index.html">
       <div class="top"><span class="dot" style="--c:#4fd1a5"></span>
         <span class="cat" style="color:#4fd1a5">Спільнота</span>
         <span class="upd">2026-07-03</span></div>
       <h2>Арт Пікнік</h2>
       <p>Арт Пікнік — щомісячна безкоштовна зустріч для родин: знімаємо кліп або стопмоушен.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/art-picnic/" target="_blank" rel="noopener">index.html<span class="pdate">07.03</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/art-picnic/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/art-picnic" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="community" data-search="дія до мрії дія до мрії — «ходімо. зараз перевіримо»: путівник від наміру до першого кроку. diya-do-mriyi">
+    <article class="card" data-cat="community" data-search="дія до мрії дія до мрії — «ходімо. зараз перевіримо»: путівник від наміру до першого кроку. diya-do-mriyi poster.html index.html index-de.html impressum.html datenschutz.html stina-3d/index.html">
       <div class="top"><span class="dot" style="--c:#4fd1a5"></span>
         <span class="cat" style="color:#4fd1a5">Спільнота</span>
         <span class="upd">2026-07-05</span></div>
       <h2>Дія до мрії</h2>
       <p>Дія до мрії — «Ходімо. Зараз перевіримо»: путівник від наміру до першого кроку.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/diya-do-mriyi/index-de.html" target="_blank" rel="noopener">index-de.html</a> · <a href="https://fil-m.github.io/diya-do-mriyi/impressum.html" target="_blank" rel="noopener">impressum.html</a> · <a href="https://fil-m.github.io/diya-do-mriyi/datenschutz.html" target="_blank" rel="noopener">datenschutz.html</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/diya-do-mriyi/poster.html" target="_blank" rel="noopener">poster.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/diya-do-mriyi/" target="_blank" rel="noopener">index.html<span class="pdate">07.05</span></a> <a href="https://fil-m.github.io/diya-do-mriyi/index-de.html" target="_blank" rel="noopener">index-de.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/diya-do-mriyi/impressum.html" target="_blank" rel="noopener">impressum.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/diya-do-mriyi/datenschutz.html" target="_blank" rel="noopener">datenschutz.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/diya-do-mriyi/stina-3d/" target="_blank" rel="noopener">stina-3d/index.html<span class="pdate">07.03</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/diya-do-mriyi/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/diya-do-mriyi" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="community" data-search="спільнота спільнота — соцмережа в стилі вк 2013. без сервера: дані живуть у json-файлах репозиторію. spilnota">
+    <article class="card" data-cat="community" data-search="спільнота спільнота — соцмережа в стилі вк 2013. без сервера: дані живуть у json-файлах репозиторію. spilnota index.html">
       <div class="top"><span class="dot" style="--c:#4fd1a5"></span>
         <span class="cat" style="color:#4fd1a5">Спільнота</span>
         <span class="upd">2026-09-25</span></div>
       <h2>Спільнота</h2>
       <p>Спільнота — соцмережа в стилі ВК 2013. Без сервера: дані живуть у JSON-файлах репозиторію.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/spilnota/" target="_blank" rel="noopener">index.html<span class="pdate">09.25</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/spilnota/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/spilnota" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="community" data-search="кіноразом кіноразом — дивимось відео разом: синхронний перегляд і чат. wuw">
+    <article class="card" data-cat="community" data-search="кіноразом кіноразом — дивимось відео разом: синхронний перегляд і чат. wuw index.html">
       <div class="top"><span class="dot" style="--c:#4fd1a5"></span>
         <span class="cat" style="color:#4fd1a5">Спільнота</span>
         <span class="upd">2026-08-08</span></div>
       <h2>Кіноразом</h2>
       <p>Кіноразом — дивимось відео разом: синхронний перегляд і чат.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/WUW/" target="_blank" rel="noopener">index.html<span class="pdate">08.08</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/WUW/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/WUW" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="kids" data-search="пробне заняття з анімації за 60–90 хвилин дитина з батьками придумує історію, героїв і знімає перші кадри. animation-trial">
+    <article class="card" data-cat="kids" data-search="пробне заняття з анімації за 60–90 хвилин дитина з батьками придумує історію, героїв і знімає перші кадри. animation-trial index.html">
       <div class="top"><span class="dot" style="--c:#ffb454"></span>
         <span class="cat" style="color:#ffb454">Анімація й діти</span>
         <span class="upd">2026-08-16</span></div>
       <h2>Пробне заняття з анімації</h2>
       <p>За 60–90 хвилин дитина з батьками придумує історію, героїв і знімає перші кадри.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/animation-trial/" target="_blank" rel="noopener">index.html<span class="pdate">08.16</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/animation-trial/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/animation-trial" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="kids" data-search="анімаційна майстерня безкоштовна stop-motion майстерня для батьків і дітей у карлсруе, дві суботи на місяць. animation-workshop">
+    <article class="card" data-cat="kids" data-search="анімаційна майстерня безкоштовна stop-motion майстерня для батьків і дітей у карлсруе, дві суботи на місяць. animation-workshop index.html de.html poster.html impressum.html datenschutz.html">
       <div class="top"><span class="dot" style="--c:#ffb454"></span>
         <span class="cat" style="color:#ffb454">Анімація й діти</span>
         <span class="upd">2026-07-28</span></div>
       <h2>Анімаційна майстерня</h2>
       <p>Безкоштовна stop-motion майстерня для батьків і дітей у Карлсруе, дві суботи на місяць.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/animation-workshop/index.html" target="_blank" rel="noopener">index.html</a> · <a href="https://fil-m.github.io/animation-workshop/de.html" target="_blank" rel="noopener">de.html</a> · <a href="https://fil-m.github.io/animation-workshop/impressum.html" target="_blank" rel="noopener">impressum.html</a> · <a href="https://fil-m.github.io/animation-workshop/datenschutz.html" target="_blank" rel="noopener">datenschutz.html</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/animation-workshop/" target="_blank" rel="noopener">index.html<span class="pdate">07.28</span></a> <a href="https://fil-m.github.io/animation-workshop/de.html" target="_blank" rel="noopener">de.html<span class="pdate">07.28</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/animation-workshop/poster.html" target="_blank" rel="noopener">poster.html<span class="pdate">07.06</span></a> <a href="https://fil-m.github.io/animation-workshop/impressum.html" target="_blank" rel="noopener">impressum.html<span class="pdate">07.04</span></a> <a href="https://fil-m.github.io/animation-workshop/datenschutz.html" target="_blank" rel="noopener">datenschutz.html<span class="pdate">07.04</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/animation-workshop/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/animation-workshop" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="kids" data-search="менторство з анімації менторство для дітей 7–18 років: підготовка до фестивалів, adhd-friendly підхід. animation_mentors">
+    <article class="card" data-cat="kids" data-search="менторство з анімації менторство для дітей 7–18 років: підготовка до фестивалів, adhd-friendly підхід. animation_mentors partners.html index.html festivals.html">
       <div class="top"><span class="dot" style="--c:#ffb454"></span>
         <span class="cat" style="color:#ffb454">Анімація й діти</span>
         <span class="upd">2026-07-05</span></div>
       <h2>Менторство з анімації</h2>
       <p>Менторство для дітей 7–18 років: підготовка до фестивалів, ADHD-friendly підхід.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/animation_mentors/partners.html" target="_blank" rel="noopener">partners.html</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/animation_mentors/partners.html" target="_blank" rel="noopener">partners.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/animation_mentors/" target="_blank" rel="noopener">index.html<span class="pdate">07.05</span></a> <a href="https://fil-m.github.io/animation_mentors/festivals.html" target="_blank" rel="noopener">festivals.html<span class="pdate">04.06</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/animation_mentors/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/animation_mentors" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="creative" data-search="flow edit flow edit — міні-редактор відео для «шляху потоку»: таймлайн і css-візуали. flow-editor">
+    <article class="card" data-cat="creative" data-search="flow edit flow edit — міні-редактор відео для «шляху потоку»: таймлайн і css-візуали. flow-editor index.html">
       <div class="top"><span class="dot" style="--c:#e07bff"></span>
         <span class="cat" style="color:#e07bff">Творчість</span>
         <span class="upd">2026-10-17</span></div>
       <h2>Flow Edit</h2>
       <p>Flow Edit — міні-редактор відео для «Шляху Потоку»: таймлайн і CSS-візуали.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/flow-editor/${API}${s.video}" target="_blank" rel="noopener">${API}${s.video}</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/flow-editor/" target="_blank" rel="noopener">index.html<span class="pdate">10.17</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/flow-editor/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/flow-editor" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="creative" data-search="шлях потоку шлях потоку — світогляд, що бачить світ як процес: без бога-творця, без догм. flow-path">
+    <article class="card" data-cat="creative" data-search="шлях потоку шлях потоку — світогляд, що бачить світ як процес: без бога-творця, без догм. flow-path index.html en/index.html">
       <div class="top"><span class="dot" style="--c:#e07bff"></span>
         <span class="cat" style="color:#e07bff">Творчість</span>
         <span class="upd">2026-08-09</span></div>
       <h2>Шлях Потоку</h2>
       <p>Шлях Потоку — світогляд, що бачить світ як процес: без бога-творця, без догм.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/flow-path/en/" target="_blank" rel="noopener">en</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/flow-path/" target="_blank" rel="noopener">index.html<span class="pdate">08.09</span></a> <a href="https://fil-m.github.io/flow-path/en/" target="_blank" rel="noopener">en/index.html<span class="pdate">08.09</span> <span class="new">нове</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/flow-path/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/flow-path" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="creative" data-search="мемологія мемологія: сингулярність — пентологія про майбутнє, людей і машини. memology-website-ua">
+    <article class="card" data-cat="creative" data-search="мемологія мемологія: сингулярність — пентологія про майбутнє, людей і машини. memology-website-ua index.html">
       <div class="top"><span class="dot" style="--c:#e07bff"></span>
         <span class="cat" style="color:#e07bff">Творчість</span>
         <span class="upd">2026-04-18</span></div>
       <h2>МЕМОЛОГІЯ</h2>
       <p>МЕМОЛОГІЯ: Сингулярність — пентологія про майбутнє, людей і машини.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/Memology-Website-UA/" target="_blank" rel="noopener">index.html<span class="pdate">04.18</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/Memology-Website-UA/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/Memology-Website-UA" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="creative" data-search="портфоліо персональна сторінка тараса москаленка: хто я, що роблю, як зв&#x27;язатися. portfolio-page">
+    <article class="card" data-cat="creative" data-search="портфоліо персональна сторінка тараса москаленка: хто я, що роблю, як зв&#x27;язатися. portfolio-page index.html index-de.html poster.html">
       <div class="top"><span class="dot" style="--c:#e07bff"></span>
         <span class="cat" style="color:#e07bff">Творчість</span>
         <span class="upd">2026-07-08</span></div>
       <h2>Портфоліо</h2>
       <p>Персональна сторінка Тараса Москаленка: хто я, що роблю, як зв&#x27;язатися.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/portfolio-page/index-de.html" target="_blank" rel="noopener">index-de.html</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/portfolio-page/" target="_blank" rel="noopener">index.html<span class="pdate">07.08</span></a> <a href="https://fil-m.github.io/portfolio-page/index-de.html" target="_blank" rel="noopener">index-de.html<span class="pdate">07.08</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/portfolio-page/poster.html" target="_blank" rel="noopener">poster.html<span class="pdate">07.05</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/portfolio-page/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/portfolio-page" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="tools" data-search="akira — ментальна арифметика akira — генератор вправ з ментальної арифметики на абакусі. akira-mental-math">
+    <article class="card" data-cat="tools" data-search="akira — ментальна арифметика akira — генератор вправ з ментальної арифметики на абакусі. akira-mental-math index.html">
       <div class="top"><span class="dot" style="--c:#5ec8e5"></span>
         <span class="cat" style="color:#5ec8e5">Інструменти</span>
         <span class="upd">2026-05-27</span></div>
       <h2>Akira — ментальна арифметика</h2>
       <p>Akira — генератор вправ з ментальної арифметики на абакусі.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/akira-mental-math/" target="_blank" rel="noopener">index.html<span class="pdate">05.27</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/akira-mental-math/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/akira-mental-math" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="tools" data-search="exchange scanner аналіз валютних пар і торгових стратегій в одному екрані. exchange-scanner">
+    <article class="card" data-cat="tools" data-search="exchange scanner аналіз валютних пар і торгових стратегій в одному екрані. exchange-scanner index.html">
       <div class="top"><span class="dot" style="--c:#5ec8e5"></span>
         <span class="cat" style="color:#5ec8e5">Інструменти</span>
         <span class="upd">2026-08-05</span></div>
       <h2>Exchange Scanner</h2>
       <p>Аналіз валютних пар і торгових стратегій в одному екрані.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/exchange-scanner/" target="_blank" rel="noopener">index.html<span class="pdate">08.04</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/exchange-scanner/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/exchange-scanner" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="tools" data-search="exchange scanner beta бета exchange scanner — нові пари й експериментальні стратегії. exchange-scanner-beta">
+    <article class="card" data-cat="tools" data-search="exchange scanner beta бета exchange scanner — нові пари й експериментальні стратегії. exchange-scanner-beta index.html">
       <div class="top"><span class="dot" style="--c:#5ec8e5"></span>
         <span class="cat" style="color:#5ec8e5">Інструменти</span>
         <span class="upd">2026-08-05</span></div>
       <h2>Exchange Scanner BETA</h2>
       <p>Бета Exchange Scanner — нові пари й експериментальні стратегії.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/exchange-scanner-beta/" target="_blank" rel="noopener">index.html<span class="pdate">08.04</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/exchange-scanner-beta/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/exchange-scanner-beta" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="tools" data-search="hermonoid hermonoid — веб-чат для hermes agent на android. hermonoid">
+    <article class="card" data-cat="tools" data-search="hermonoid hermonoid — веб-чат для hermes agent на android. hermonoid index.html">
       <div class="top"><span class="dot" style="--c:#5ec8e5"></span>
         <span class="cat" style="color:#5ec8e5">Інструменти</span>
         <span class="upd">2026-06-18</span></div>
       <h2>Hermonoid</h2>
       <p>Hermonoid — веб-чат для Hermes Agent на Android.</p>
-      
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/hermonoid/" target="_blank" rel="noopener">index.html<span class="pdate">06.11</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/hermonoid/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/hermonoid" target="_blank" rel="noopener" title="Репозиторій">git</a>
       </div>
     </article>
-    <article class="card" data-cat="tools" data-search="стіна 3d стіна 3d — бюджетна волонтерська ферма 3d-друку в карлсруе. stina-3d">
+    <article class="card" data-cat="tools" data-search="стіна 3d стіна 3d — бюджетна волонтерська ферма 3d-друку в карлсруе. stina-3d poster.html index.html de.html">
       <div class="top"><span class="dot" style="--c:#5ec8e5"></span>
         <span class="cat" style="color:#5ec8e5">Інструменти</span>
         <span class="upd">2026-07-05</span></div>
       <h2>Стіна 3D</h2>
       <p>Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе.</p>
-      <div class="subs">ще сторінки: <a href="https://fil-m.github.io/stina-3d/index.html" target="_blank" rel="noopener">index.html</a> · <a href="https://fil-m.github.io/stina-3d/de.html" target="_blank" rel="noopener">de.html</a></div>
+      <div class="pages"><span class="plabel">сторінки:</span> <a href="https://fil-m.github.io/stina-3d/poster.html" target="_blank" rel="noopener">poster.html<span class="pdate">07.05</span> <span class="new">нове</span></a> <a href="https://fil-m.github.io/stina-3d/" target="_blank" rel="noopener">index.html<span class="pdate">07.05</span></a> <a href="https://fil-m.github.io/stina-3d/de.html" target="_blank" rel="noopener">de.html<span class="pdate">07.03</span></a></div>
       <div class="links">
         <a class="open" href="https://fil-m.github.io/stina-3d/" target="_blank" rel="noopener">Відкрити →</a>
         <a class="gh" href="https://github.com/Fil-m/stina-3d" target="_blank" rel="noopener" title="Репозиторій">git</a>

@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: "3.11"
       - name: Rebuild index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python build.py
       - name: Commit if changed
         run: |
