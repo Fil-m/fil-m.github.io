@@ -29,7 +29,7 @@ CATS = {
     "kids": ("Анімація й діти", "#ffb454"),
     "creative": ("Творчість", "#e07bff"),
     "tools": ("Інструменти", "#5ec8e5"),
-    "server": ("Сервер", "#6ee7b7"),
+    "code": ("Без сторінки", "#8b93a7"),
 }
 
 # name -> (category, title, опис)
@@ -229,7 +229,7 @@ def build(live, dead):
         if name in CURATED:
             cat, title, desc = CURATED[name]
         else:
-            cat, title, desc = "tools", name, d["desc"]
+            cat, title, desc = "code", name, d["desc"]
         cards.append({
             "name": name, "title": title, "desc": desc, "cat": cat,
             "url": f"https://github.com/{USER}/{name}",
