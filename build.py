@@ -103,7 +103,8 @@ def probe(repo):
 
 def collect():
     repos = get_json(f"https://api.github.com/users/{USER}/repos?per_page=100&sort=updated")
-    todo = [r for r in repos if r.get("has_pages") or r.get("homepage")]
+    self_repo = f"{USER.lower()}.github.io"
+    todo = [r for r in repos if (r.get("has_pages") or r.get("homepage")) and r["name"] != self_repo]
     with ThreadPoolExecutor(max_workers=10) as ex:
         got = [x for x in ex.map(probe, todo) if x and x.get("status") == 200]
     return got

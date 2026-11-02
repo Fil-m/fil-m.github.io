@@ -1,14 +1,5 @@
 [
  {
-  "name": "fil-m.github.io",
-  "url": "https://fil-m.github.io/",
-  "status": 200,
-  "title": "Fil-m — усі сторінки",
-  "meta": "Хаб усіх проєктів і сторінок Тараса Москаленка на github.io: ігри, спільнота, анімація, творчість, інструменти.",
-  "repo_desc": "Хаб усіх моїх сторінок на github.io",
-  "updated": "2026-11-02"
- },
- {
   "name": "pixel-flow",
   "url": "https://fil-m.github.io/pixel-flow/",
   "status": 200,
