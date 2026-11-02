@@ -237,7 +237,7 @@ def build(live, dead):
             mark = ' <span class="new">нове</span>' if pg["date"] == newest and pg["short"] != "index.html" else ""
             items.append(
                 f'<a href="{esc(pg["url"])}" target="_blank" rel="noopener">{esc(pg["short"])}'
-                f'<span class="pdate">{esc(pg["date"][5:].replace("-", "."))}</span>{mark}</a>'
+                f'<span class="pdate">{esc(pg["date"][8:10] + "." + pg["date"][5:7])}</span>{mark}</a>'
             )
         more = f'<span class="more">+{len(pages) - 8}</span>' if len(pages) > 8 else ""
         pages_html = ('<div class="pages"><span class="plabel">сторінки:</span> ' + " ".join(items) + more + "</div>") if items else ""
