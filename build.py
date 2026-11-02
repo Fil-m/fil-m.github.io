@@ -29,6 +29,7 @@ CATS = {
     "kids": ("Анімація й діти", "#ffb454"),
     "creative": ("Творчість", "#e07bff"),
     "tools": ("Інструменти", "#5ec8e5"),
+    "server": ("Сервер", "#6ee7b7"),
 }
 
 # name -> (category, title, опис)
@@ -205,7 +206,7 @@ def collect():
     return live, dead
 
 
-def build(live, dead):
+def build(live, dead, server):
     cards = []
     for p in live:
         name = p["name"]
@@ -220,6 +221,22 @@ def build(live, dead):
             "url": p.get("url") or f"{BASE}/{name}/",
             "repo": f"https://github.com/{USER}/{name}",
             "upd": p.get("updated", ""), "pages": p.get("pages") or [],
+        })
+
+    for s in server.get("sites", []):
+        host = s["domain"].replace(".116-203-217-173.sslip.io", "")
+        pages = s.get("pages") or []
+        if not pages and s.get("status") != 200:
+            continue
+        cards.append({
+            "name": host,
+            "title": s.get("title") or host,
+            "desc": "Сервер · " + s["domain"] + ("" if pages else " · застосунок (не статичні файли)"),
+            "cat": "server",
+            "url": f"https://{s['domain']}/",
+            "repo": "",
+            "upd": max([p["date"] for p in pages], default=""),
+            "pages": [{"short": p["path"], "url": p["url"], "date": p["date"]} for p in pages],
         })
 
     order = {k: i for i, k in enumerate(CATS)}
@@ -242,6 +259,8 @@ def build(live, dead):
         more = f'<span class="more">+{len(pages) - 8}</span>' if len(pages) > 8 else ""
         pages_html = ('<div class="pages"><span class="plabel">сторінки:</span> ' + " ".join(items) + more + "</div>") if items else ""
         search = (c["title"] + " " + c["desc"] + " " + c["name"] + " " + " ".join(p["short"] for p in pages)).lower()
+        gh = (f'<a class="gh" href="{esc(c["repo"])}" target="_blank" rel="noopener" title="Репозиторій">git</a>'
+              if c["repo"] else "")
         blocks.append(f"""
     <article class="card" data-cat="{c['cat']}" data-search="{esc(search)}">
       <div class="top"><span class="dot" style="--c:{color}"></span>
@@ -252,7 +271,7 @@ def build(live, dead):
       {pages_html}
       <div class="links">
         <a class="open" href="{esc(c['url'])}" target="_blank" rel="noopener">Відкрити →</a>
-        <a class="gh" href="{esc(c['repo'])}" target="_blank" rel="noopener" title="Репозиторій">git</a>
+        {gh}
       </div>
     </article>""")
 
@@ -272,6 +291,8 @@ def build(live, dead):
         chips.append(f'<button class="chip" data-f="{key}" style="--c:{color}">{esc(nm)} · {n}</button>')
 
     total_pages = sum(len(c["pages"]) for c in cards)
+    n_srv = sum(1 for c in cards if c["cat"] == "server")
+    n_gh = len(cards) - n_srv
     today = datetime.date.today().isoformat()
     return f"""<!doctype html>
 <html lang="uk">
@@ -351,8 +372,9 @@ def build(live, dead):
   <p class="sub">Кожен html-файл, який реально публікується з репозиторіїв:
   назва, дата останньої зміни, пряме посилання. Новіші за головну позначені «нове».</p>
   <div class="stats">
-    <div class="stat"><b>{len(cards)}</b> сайтів</div>
-    <div class="stat"><b>{total_pages}</b> html-сторінок</div>
+    <div class="stat"><b>{n_gh}</b> GitHub-сайтів</div>
+    <div class="stat"><b>{n_srv}</b> на сервері</div>
+    <div class="stat"><b>{total_pages}</b> сторінок усього</div>
     <div class="stat"><b>{len(dead)}</b> репо без сторінки</div>
   </div>
   <div class="search"><input id="q" type="search" placeholder="Пошук: назва, сторінка, опис…" autocomplete="off"></div>
@@ -408,7 +430,11 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{{
 
 def main():
     live, dead = collect()
-    out = build(live, dead)
+    sp = os.path.join(HERE, "server_pages.json")
+    server = {"sites": []}
+    if os.path.exists(sp):
+        server = json.load(open(sp, encoding="utf-8"))
+    out = build(live, dead, server)
     open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(out)
     open(os.path.join(HERE, ".nojekyll"), "w").write("")
     json.dump({"live": live, "dead": dead}, open(os.path.join(HERE, "pages.json"), "w", encoding="utf-8"),
