@@ -52,11 +52,20 @@ PAGES = {
     "stina-3d": ("tools", "Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе."),
 }
 
-TITLES_FALLBACK = {
+TITLES = {
     "--braves": "Infinity Braves",
     "context": "CONTEXT v3 — Тіло",
     "diya-do-mriyi": "Дія до мрії",
     "ReGo": "SYNERGY: PHASE SHIFT 3D",
+    "habitat-os-test": "Habitat OS — тест",
+    "habitat-os-workshop": "Habitat OS — майстерня",
+    "aim-lab-scientist": "NeuroAim Lab",
+    "pixel-flow": "Pixel Flow",
+    "element-game": "Element World",
+    "bitsprite": "КАБАЛОК — Кристал",
+    "WUW": "Кіноразом",
+    "spilnota": "Спільнота",
+    "flow-path": "Шлях Потоку",
 }
 
 probe = {p["name"]: p for p in json.load(open(os.path.join(HERE, "probe.json"), encoding="utf-8"))}
@@ -64,7 +73,7 @@ probe = {p["name"]: p for p in json.load(open(os.path.join(HERE, "probe.json"), 
 cards = []
 for name, (cat, desc) in PAGES.items():
     p = probe.get(name, {})
-    title = TITLES_FALLBACK.get(name) or p.get("title") or name
+    title = TITLES.get(name) or p.get("title") or name
     title = re.sub(r"\s*[|—–]\s*$", "", title).strip()
     # прибираємо довгі хвости типу "— сторінка ..."
     if len(title) > 70:
@@ -140,7 +149,7 @@ HTML = f"""<!doctype html>
   .top {{ display:flex; align-items:center; gap:8px; font-size:12px; }}
   .dot {{ width:8px; height:8px; border-radius:50%; background:var(--c); }}
   .cat {{ font-weight:600; }}
-  .upd {{ margin-left:auto; color:#5f6879; }}
+  .upd {{ margin-left:auto; color:#77839a; }}
   h2 {{ font-size:19px; margin:12px 0 6px; line-height:1.25; }}
   .card p {{ color:#aab2c4; margin:0; flex:1; font-size:14.5px; }}
   .links {{ display:flex; align-items:center; gap:10px; margin-top:14px; }}
@@ -150,7 +159,7 @@ HTML = f"""<!doctype html>
         padding:4px 8px; border-radius:8px; }}
   .gh:hover {{ color:var(--fg); }}
   .empty {{ display:none; color:var(--mut); padding:40px 4px; grid-column:1/-1; text-align:center; }}
-  footer {{ max-width:1100px; margin:0 auto; padding:0 20px 50px; color:#5f6879; font-size:13px; }}
+  footer {{ max-width:1100px; margin:0 auto; padding:0 20px 50px; color:#77839a; font-size:13px; }}
   footer a {{ color:#7d879c; }}
 </style>
 </head>
