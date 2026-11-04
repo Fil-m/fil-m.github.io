@@ -2,7 +2,7 @@ name: Update pages hub
 
 on:
   schedule:
-    - cron: "0 5 * * 1"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
