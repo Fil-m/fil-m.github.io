@@ -640,10 +640,10 @@
   <a href="https://github.com/Fil-m/fil-m.github.io">код цієї сторінки</a></p>
 </footer>
 <script>
-const cards=[...document.querySelectorAll('.card')];
 const q=document.getElementById('q'), empty=document.getElementById('empty');
 let cat='all';
 function apply(){
+  const cards=[...document.querySelectorAll('.card')];
   const s=q.value.trim().toLowerCase(); let n=0;
   cards.forEach(c=>{
     const okCat = cat==='all' || c.dataset.cat===cat;
@@ -658,5 +658,6 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
   b.classList.add('active'); cat=b.dataset.f; apply();
 }));
 </script>
+<script src="app.js"></script>
 </body>
 </html>
